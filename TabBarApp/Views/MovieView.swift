@@ -62,6 +62,7 @@ final class MovieView: UIView {
         self.descriptionLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         self.descriptionLabel.text = self.movieInfo.overView
         self.descriptionLabel.textColor = .white
+        self.descriptionLabel.clipsToBounds = true
         self.addSubview(self.descriptionLabel)
     }
 

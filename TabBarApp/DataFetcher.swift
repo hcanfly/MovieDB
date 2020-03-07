@@ -8,16 +8,18 @@
 
 import Foundation
 
-let tmdbKey = "<your TMDb api key goes here"
+let tmdbKey = "<your TMDb api key goes here>"    // "<your TMDb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)&language=en-US&page=1"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)&language=en-US&page=1"
 let searchBaseURLString = "https://api.themoviedb.org/3/search/movie?api_key=\(tmdbKey)&query="
+let searchActorsBaseURLString = "https://api.themoviedb.org/3/search/person?api_key=\(tmdbKey)&page=1&include_adult=false&query="
 
 
 // download data and decode from JSON
 func fetchNetworkData<T: Decodable>(urlString: String, myType: T.Type, completion: @escaping (T) -> Void) {
       guard let url = URL(string: urlString) else {
+        print("did you enter your TMBD api key in DataFetcher.swift?")
         return
       }
     let task = URLSession.shared.dataTask(with: url) { data, _, error in

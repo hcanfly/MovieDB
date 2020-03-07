@@ -22,13 +22,12 @@ final class ActorViewController: UIViewController, Storyboarded {
 
         let attrs = [
             NSAttributedString.Key.foregroundColor: UIColor.white
-            //NSAttributedString.Key.font: UIFont(name: "Georgia-Bold", size: 24)!
         ]
         self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtain")!)
 
-        let movieURL = "https://api.themoviedb.org/3/person/\(self.actorId)?api_key=\(tmdbKey)"
-        fetchNetworkData(urlString: movieURL, myType: Actor.self) { [weak self] actor in
+        let actorURL = "https://api.themoviedb.org/3/person/\(self.actorId)?api_key=\(tmdbKey)"
+        fetchNetworkData(urlString: actorURL, myType: Actor.self) { [weak self] actor in
              if let self = self {
                 self.actor = actor
                 self.title = actor.name

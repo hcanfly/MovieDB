@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E199FF624142960003DE8BC /* SearchSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E199FF524142960003DE8BC /* SearchSelectorViewController.swift */; };
 		3E5404B1240C1BA400ECDD3A /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B0240C1BA400ECDD3A /* AsyncImageView.swift */; };
 		3E5404B3240C345100ECDD3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B2240C345100ECDD3A /* Utils.swift */; };
 		3E5404B5240C352C00ECDD3A /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B4240C352C00ECDD3A /* MovieModel.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E199FF524142960003DE8BC /* SearchSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSelectorViewController.swift; sourceTree = "<group>"; };
 		3E5404B0240C1BA400ECDD3A /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		3E5404B2240C345100ECDD3A /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3E5404B4240C352C00ECDD3A /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				3E6527D1240EBCC5004A596F /* ActorViewController.swift */,
 				3E5404BA240CC53B00ECDD3A /* MovieViewController.swift */,
 				4EA6A022240B246F0063C21B /* NowPlayingViewController.swift */,
+				3E199FF524142960003DE8BC /* SearchSelectorViewController.swift */,
 				3E6527C7240D5CC1004A596F /* SearchViewController.swift */,
 				4EA6A034240B27050063C21B /* TabViewController.swift */,
 				4EA6A024240B246F0063C21B /* UpcomingViewController.swift */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E5404B5240C352C00ECDD3A /* MovieModel.swift in Sources */,
+				3E199FF624142960003DE8BC /* SearchSelectorViewController.swift in Sources */,
 				3E6527CA240D5D2C004A596F /* SearchCoordinator.swift in Sources */,
 				3EDE6BDB240F0C0E00CC5E14 /* CastTableViewCell.swift in Sources */,
 				3E5404BB240CC53B00ECDD3A /* MovieViewController.swift in Sources */,

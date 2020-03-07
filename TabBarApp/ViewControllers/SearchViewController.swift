@@ -10,6 +10,7 @@ import UIKit
 
 final class SearchViewController: UIViewController, Storyboarded {
     weak var coordinator: SearchCoordinator?
+    var searchType: SearchType?
     private var tableView: UITableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
     private var movies: ListMovies?
@@ -18,34 +19,61 @@ final class SearchViewController: UIViewController, Storyboarded {
 
     
     override func viewDidLoad() {
-    super.viewDidLoad()
+        super.viewDidLoad()
 
-    self.view.layer.contents = UIImage(named: "RedCurtains")?.cgImage
-    self.view.layer.contentsGravity = .resizeAspectFill
+        self.view.layer.contents = UIImage(named: "RedCurtains")?.cgImage
+        self.view.layer.contentsGravity = .resizeAspectFill
 
-    self.tableView.frame = self.view.frame.insetBy(dx: 20, dy: 180)
-    self.tableView.backgroundColor = .clear
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
-    self.tableView.separatorColor = .clear
-    self.view.addSubview(self.tableView)
+        self.tableView.frame = self.view.frame.insetBy(dx: 20, dy: 180)
+        self.tableView.backgroundColor = .clear
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.separatorColor = .clear
+        self.view.addSubview(self.tableView)
 
-    self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableViewCell")
 
-    searchController.searchResultsUpdater = self
-    searchController.obscuresBackgroundDuringPresentation = false
-    searchController.searchBar.placeholder = "Search Movies"
-    navigationItem.searchController = searchController
+        self.searchController.delegate = self
+        self.searchController.searchResultsUpdater = self
+        self.searchController.searchBar.autocapitalizationType = .none
+        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.searchBar.delegate = self
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        var searchPlaceholder = ""
+        switch self.searchType {
+        case .movie:
+            searchPlaceholder = "Search Movies"
+        case .tv:
+            searchPlaceholder = "Search TV"
+        case .actor:
+            searchPlaceholder = "Search Actors"
+        case .none:
+            print("No search type")
+        }
+        self.searchController.searchBar.placeholder = searchPlaceholder
+        self.navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
 
-    self.debounceReload = self.debouncer.debounce(delay: .seconds(1)) {
-        if self.searchController.searchBar.text!.count > 1 {
-            // just in case of an extra space. more than that - too bad
-            let newstring = self.searchController.searchBar.text!.replacingOccurrences(of: "  ", with: " ")
-            var searchString = newstring.replacingOccurrences(of: " ", with: "+")
-            searchString = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            if searchString.count > 1 {
-                self.findMatchingMovies(title: searchString)
-            }
+        self.debounceReload = self.debouncer.debounce(delay: .seconds(1)) {
+            if self.searchController.searchBar.text!.count > 1 {
+                // just in case of an extra space. more than that - too bad
+                let newstring = self.searchController.searchBar.text!.replacingOccurrences(of: "  ", with: " ")
+                var searchString = newstring.replacingOccurrences(of: " ", with: "+")
+                searchString = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                if searchString.count > 1 {
+                    switch self.searchType {
+                    case .movie:
+                        self.findMatchingMovies(title: searchString)
+                    case .tv:
+                        self.findMatchingMovies(title: searchString)        // tv and actor search not implemented
+                    case .actor:
+                        self.findMatchingMovies(title: searchString)
+                    case .none:
+                        print("No search type")
+                    }
+                }
             }
         }
     }
@@ -95,6 +123,11 @@ extension SearchViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     self.debounceReload()
   }
+}
+
+extension SearchViewController: UISearchControllerDelegate, UISearchBarDelegate {
+
+
 }
 
 
