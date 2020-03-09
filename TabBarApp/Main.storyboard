@@ -90,13 +90,23 @@
                     <view key="view" contentMode="scaleToFill" id="Tsy-o3-00V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1xt-kK-zOK" customClass="ActorView" customModule="TabBarApp" customModuleProvider="target">
+                                <rect key="frame" x="20" y="44" width="381" height="818"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="hq4-VW-fN6"/>
                     </view>
+                    <connections>
+                        <outlet property="actorView" destination="1xt-kK-zOK" id="IxW-Bs-5Ya"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iue-kc-PHl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="238" y="125"/>
+            <point key="canvasLocation" x="237.68115942028987" y="124.55357142857142"/>
         </scene>
     </scenes>
 </document>

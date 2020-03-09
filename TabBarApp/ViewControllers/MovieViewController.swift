@@ -15,6 +15,7 @@ final class MovieViewController: UIViewController, Storyboarded {
 
     var movieView: MovieView!
     var castView: CastView!
+    var initialized = false
 
     
     override func viewDidLoad() {
@@ -26,8 +27,16 @@ final class MovieViewController: UIViewController, Storyboarded {
         ]
         self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtain")!)
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+    }
 
-        self.loadMovieInfo()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if !self.initialized {
+            self.loadMovieInfo()
+            self.initialized = true
+        }
     }
 
     private func loadMovieInfo() {

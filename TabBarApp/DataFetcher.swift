@@ -8,7 +8,7 @@
 
 import Foundation
 
-let tmdbKey = "<your TMDb api key goes here>"    // "<your TMDb api key goes here>"
+let tmdbKey = "e1ca1713c055f737455c5a27de78f41d"    // "<your TMDb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)&language=en-US&page=1"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)&language=en-US&page=1"
