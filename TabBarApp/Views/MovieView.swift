@@ -15,56 +15,14 @@ final class MovieView: UIView {
     private let ratingsLabel: UILabel
     private let descriptionLabel: UILabel
     private let voterCountLabel: UILabel
-    private var poster: AsyncImageView?
-    private var movieInfo = Movie(id: 0, imdbId: "", title: "", overView: "", backdropPath: nil, posterPath: nil, releaseDate: "", runtime: 100, voteAverage: nil, voteCount: nil)
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        let desiredImageHeight = CGFloat(self.bounds.height * 0.7)
-        if movieInfo.posterPath != nil {
-            self.poster = AsyncImageView(frame: CGRect(x: 0, y: 50, width: desiredImageHeight * 0.666666, height: desiredImageHeight), urlString: imageURLBasePath + movieInfo.posterPath!)
-            self.poster?.clipsToBounds = true
-            self.addSubview(self.poster!)
+    private var poster: AsyncImageView!
+    var movieInfo: Movie! {
+        didSet {
+            self.loadInfo()
+            setNeedsLayout()
         }
-
-        self.nameLabel.frame = CGRect(x: 0, y: 0, width: 360, height: 20)
-        self.descriptionLabel.frame = CGRect(x: desiredImageHeight * 0.666666 + 16, y: 50, width: self.bounds.width > 370 ? 150 : 120, height: self.bounds.height - 60)
-        self.descriptionLabel.sizeToFit()
-        self.runningTimeLabel.frame = CGRect(x: 0, y: 20, width: 100, height: 20)
-        self.ratingsLabel.frame = CGRect(x: 80, y: 20, width: 60, height: 20)
-        self.voterCountLabel.frame = CGRect(x: 128, y: 20, width: 60, height: 20)
     }
 
-    convenience init(frame: CGRect, movieInfo: Movie) {
-        self.init(frame: frame)
-
-        self.backgroundColor = .clear
-
-        self.movieInfo = movieInfo
-        let releaseYear = movieInfo.releaseDate != nil ? movieInfo.releaseDate!.prefix(4) : "Unknown"
-        self.nameLabel.text = self.movieInfo.title + " (" + releaseYear + ")"
-        self.nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
-        self.nameLabel.textColor = .white
-        self.nameLabel.adjustsFontSizeToFitWidth = true
-        self.runningTimeLabel.text = runningTime()
-        self.runningTimeLabel.font = UIFont(name: "HelveticaNeue", size: 12.0)
-        self.runningTimeLabel.textColor = .white
-        self.ratingsLabel.text = ratingsInfo()
-        self.ratingsLabel.font = UIFont(name: "HelveticaNeue", size: 12.0)
-        self.ratingsLabel.textColor = .white
-        self.voterCountLabel.text = self.movieInfo.voteCount != nil ? "(\(self.movieInfo.voteCount!))" : ""
-        self.voterCountLabel.font = UIFont(name: "HelveticaNeue", size: 12.0)
-        self.voterCountLabel.textColor = .white
-        self.descriptionLabel.textAlignment = .left
-        self.descriptionLabel.lineBreakMode = .byTruncatingTail
-        self.descriptionLabel.numberOfLines = 0
-        self.descriptionLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        self.descriptionLabel.text = self.movieInfo.overView
-        self.descriptionLabel.textColor = .white
-        self.descriptionLabel.clipsToBounds = true
-        self.addSubview(self.descriptionLabel)
-    }
 
     override init(frame: CGRect) {
         self.nameLabel = UILabel(frame: CGRect.zero)
@@ -72,16 +30,85 @@ final class MovieView: UIView {
         self.runningTimeLabel = UILabel(frame: CGRect.zero)
         self.ratingsLabel = UILabel(frame: CGRect.zero)
         self.voterCountLabel = UILabel(frame: CGRect.zero)
+        self.poster = AsyncImageView(frame: CGRect.zero, urlString: nil)
 
         super.init(frame: frame)
 
-        self.bounds = CGRect(origin: CGPoint(x: 0, y: 0), size: frame.size)
-        self.frame = frame
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.nameLabel)
+        self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.runningTimeLabel)
-        self.addSubview(self.runningTimeLabel)
+        self.runningTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.descriptionLabel)
+        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.ratingsLabel)
+        self.ratingsLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.voterCountLabel)
+        self.voterCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.poster)
+        self.poster.translatesAutoresizingMaskIntoConstraints = false
+
+        self.initializeContraints()
+    }
+
+    private func initializeContraints() {
+
+        NSLayoutConstraint.activate([
+            self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 14),
+            self.nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
+            self.nameLabel.heightAnchor.constraint(equalToConstant: 18),
+
+            self.runningTimeLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 4),
+            self.runningTimeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
+            self.runningTimeLabel.heightAnchor.constraint(equalToConstant: 18),
+            self.ratingsLabel.topAnchor.constraint(equalTo: self.runningTimeLabel.topAnchor),
+            self.ratingsLabel.leadingAnchor.constraint(equalTo: self.runningTimeLabel.trailingAnchor, constant: 2),
+            self.voterCountLabel.topAnchor.constraint(equalTo: self.runningTimeLabel.topAnchor),
+            self.voterCountLabel.leadingAnchor.constraint(equalTo: self.ratingsLabel.trailingAnchor, constant: 2),
+
+            self.poster.topAnchor.constraint(equalTo: self.runningTimeLabel.bottomAnchor, constant: 4),
+            self.poster.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
+            self.poster.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.poster.widthAnchor.constraint(equalTo: self.poster.heightAnchor, multiplier: 0.6666),
+
+            self.descriptionLabel.topAnchor.constraint(equalTo: self.poster.topAnchor),
+            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.poster.trailingAnchor, constant: 4),
+            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4),
+            self.descriptionLabel.heightAnchor.constraint(equalTo: self.poster.heightAnchor)
+
+        ])
+    }
+
+    func loadInfo() {
+        self.backgroundColor = .clear
+
+        if movieInfo.posterPath != nil {
+            self.poster.downloadImage(urlString: imageURLBasePath + movieInfo.posterPath!)
+            self.poster?.clipsToBounds = true
+        }
+
+        let releaseYear = movieInfo.releaseDate != nil ? movieInfo.releaseDate!.prefix(4) : "Unknown"
+        self.nameLabel.text = self.movieInfo.title + " (" + releaseYear + ")"
+        self.nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
+        self.nameLabel.textColor = .white
+        self.nameLabel.adjustsFontSizeToFitWidth = true
+        self.runningTimeLabel.text = runningTime()
+        self.runningTimeLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.runningTimeLabel.textColor = .white
+        self.ratingsLabel.text = ratingsInfo()
+        self.ratingsLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.ratingsLabel.textColor = .white
+        self.voterCountLabel.text = self.movieInfo.voteCount != nil ? "(\(self.movieInfo.voteCount!))" : ""
+        self.voterCountLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.voterCountLabel.textColor = .white
+        self.descriptionLabel.textAlignment = .left
+        self.descriptionLabel.lineBreakMode = .byTruncatingTail
+        self.descriptionLabel.numberOfLines = 0
+        self.descriptionLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.descriptionLabel.text = self.movieInfo.overView
+        self.descriptionLabel.sizeToFit()
+        self.descriptionLabel.textColor = .white
+        self.descriptionLabel.clipsToBounds = true
     }
 
     private func runningTime() -> String {
@@ -107,3 +134,4 @@ final class MovieView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

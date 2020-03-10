@@ -10,31 +10,47 @@ import UIKit
 
 final class CastView: UIView {
     var coordinator: ActorCoordinator?
-    var cast: Cast!
-    private var label = UILabel()
-    private var tableView = UITableView()
+    private var label: UILabel!
+    private var tableView: UITableView!
+    var cast: Cast!  {
+           didSet {
+            self.tableView.reloadData()
+           }
+       }
 
-
-    convenience init(frame: CGRect, coordinator: ActorCoordinator, cast: Cast) {
+    convenience init(frame: CGRect, coordinator: ActorCoordinator) {
         self.init(frame: frame)
 
         self.coordinator = coordinator
-        self.cast = cast
         self.backgroundColor = .systemPink
+        self.translatesAutoresizingMaskIntoConstraints = false
+
+        self.label = UILabel(frame: CGRect.zero)
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.label)
+        self.tableView = UITableView(frame: CGRect.zero)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.tableView)
 
         self.label.text = "Cast:"
         self.label.font = UIFont(name: "HelveticaNeue", size: 16.0)
         self.label.textColor = .white
-        self.addSubview(self.label)
 
-        setupTableView()
+        self.setupTableView()
+        self.initializeContraints()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    private func initializeContraints() {
+        NSLayoutConstraint.activate([
+            self.label.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
+            self.label.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
 
-        self.label.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
-        self.tableView.frame = CGRect(x: 0, y: 22, width: self.bounds.width, height: self.bounds.height - 20)
+            self.tableView.topAnchor.constraint(equalTo: self.label.bottomAnchor, constant: 2),
+            self.tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
+            self.tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4),
+            self.tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.safeAreaInsets.bottom - 14),
+
+            ])
     }
 
     private func setupTableView() {
@@ -42,18 +58,24 @@ final class CastView: UIView {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorColor = .clear
-        self.addSubview(self.tableView)
 
         self.tableView.register(CastTableViewCell.self, forCellReuseIdentifier: CastTableViewCell.reuseIdentifier)
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 
 extension CastView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cast.cast!.count
+        return self.cast == nil ? 0 : self.cast.cast!.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,3 +100,4 @@ extension CastView: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+

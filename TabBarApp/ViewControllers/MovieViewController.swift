@@ -17,48 +17,61 @@ final class MovieViewController: UIViewController, Storyboarded {
     var castView: CastView!
     var initialized = false
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.actorCoordinator = ActorCoordinator(navigationController: self.navigationController!)
         let attrs = [
             NSAttributedString.Key.foregroundColor: UIColor.white
         ]
         self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtain")!)
-        self.view.translatesAutoresizingMaskIntoConstraints = false
+        // self.view.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func loadView() {
+        super.loadView()
 
-        if !self.initialized {
-            self.loadMovieInfo()
-            self.initialized = true
-        }
+        self.movieView = MovieView(frame: CGRect.zero)
+        self.movieView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.movieView)
+
+        self.actorCoordinator = ActorCoordinator(navigationController: self.navigationController!)
+        self.castView = CastView(frame: CGRect.zero, coordinator: self.actorCoordinator!)
+        self.castView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.castView)
+
+        NSLayoutConstraint.activate([
+            self.movieView.widthAnchor.constraint(equalToConstant: 400),
+            self.movieView.heightAnchor.constraint(equalTo: self.movieView.widthAnchor, multiplier: 1.0),
+            self.movieView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
+
+            self.castView.topAnchor.constraint(equalTo: self.movieView.bottomAnchor, constant: 10),
+            self.castView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
+            self.castView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 8),
+            self.castView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+
+        ])
+
+        self.loadMovieInfo()
+
     }
 
     private func loadMovieInfo() {
-        let edgeInsets = self.view.safeAreaInsets
-        let movieViewFrame = CGRect(x: 10, y: edgeInsets.top + 10, width: self.view.bounds.width - 20, height: self.view.bounds.height * 0.5)
+
         getMovieInfo(movieId: self.movieId) { [weak self] movie in
             if let self = self {
                 self.title = movie.title
-                self.movieView = MovieView(frame: movieViewFrame, movieInfo: movie)
-                self.view.addSubview(self.movieView)
+                self.movieView.movieInfo = movie
                 }
             }
 
         getCastInfo(movieId: self.movieId) { [weak self] cast in
             if let self = self {
-               let movieCast = cast
-
-               let yOffset = movieViewFrame.size.height + movieViewFrame.origin.y - 40
-                self.castView = CastView(frame: CGRect(x: 10, y: yOffset, width: movieViewFrame.width, height: self.view.frame.height - yOffset), coordinator: self.actorCoordinator!, cast: cast)
-               self.castView.cast = movieCast
-               self.view.addSubview(self.castView)
+               self.castView.cast = cast
             }
          }
     }
 }
+
