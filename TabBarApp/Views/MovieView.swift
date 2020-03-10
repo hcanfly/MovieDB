@@ -72,10 +72,9 @@ final class MovieView: UIView {
             self.poster.widthAnchor.constraint(equalTo: self.poster.heightAnchor, multiplier: 0.6666),
 
             self.descriptionLabel.topAnchor.constraint(equalTo: self.poster.topAnchor),
-            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.poster.trailingAnchor, constant: 4),
-            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -4),
-            self.descriptionLabel.heightAnchor.constraint(equalTo: self.poster.heightAnchor)
-
+            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.poster.trailingAnchor, constant: 6),
+            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -6),
+            self.descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: self.poster.heightAnchor)
         ])
     }
 
@@ -106,7 +105,7 @@ final class MovieView: UIView {
         self.descriptionLabel.numberOfLines = 0
         self.descriptionLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         self.descriptionLabel.text = self.movieInfo.overView
-        self.descriptionLabel.sizeToFit()
+        //self.descriptionLabel.sizeToFit()
         self.descriptionLabel.textColor = .white
         self.descriptionLabel.clipsToBounds = true
     }
