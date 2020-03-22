@@ -56,6 +56,8 @@ final class SearchViewController: UIViewController, Storyboarded {
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
 
+        self.setupConstraints()
+
         self.debounceReload = self.debouncer.debounce(delay: .seconds(1)) {
             if self.searchController.searchBar.text!.count > 1 {
                 // just in case of an extra space. more than that - too bad
@@ -76,6 +78,25 @@ final class SearchViewController: UIViewController, Storyboarded {
                 }
             }
         }
+    }
+
+    private func setupConstraints() {
+        let edgeInsets = self.view.safeAreaInsets
+
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+        self.tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: edgeInsets.left),
+        self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+        self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: edgeInsets.bottom),
+        self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: edgeInsets.right)
+        ])
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.searchController.searchBar.becomeFirstResponder()
     }
 
     private func findMatchingMovies(title: String) {
@@ -113,6 +134,8 @@ extension SearchViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
 
     cell.textLabel?.text = self.movies!.movies![indexPath.row].title
+    cell.textLabel?.textColor = .white
+    cell.backgroundColor = .clear
 
     return cell
   }

@@ -10,7 +10,7 @@ import UIKit
 
 
 final class AsyncImageView: UIImageView {
-    static let placeHolderImage = UIImage(named: "Loading")
+    //static let placeHolderImage = UIImage(named: "Loading")
 
     init(frame: CGRect, urlString: String?) {
         super.init(frame: frame)
@@ -31,7 +31,7 @@ final class AsyncImageView: UIImageView {
 
 
     func downloadImage(urlString: String) {
-        // these steps aren't really necessary for URLs because they come from a known source. worst case should be not found.
+        // these steps aren't really necessary for our URLs because they come from a known source. worst case should be no data.
         guard let localValidatedURLString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             print("Invalid URL string")
             return
@@ -47,7 +47,6 @@ final class AsyncImageView: UIImageView {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self.image = image
-                        AsyncCachedImageView.cachedImages[urlString] = image
                     }
                 }
                 return

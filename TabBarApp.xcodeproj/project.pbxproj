@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E199FF624142960003DE8BC /* SearchSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E199FF524142960003DE8BC /* SearchSelectorViewController.swift */; };
-		3E5404B1240C1BA400ECDD3A /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B0240C1BA400ECDD3A /* AsyncImageView.swift */; };
+		3E5404B1240C1BA400ECDD3A /* AsyncCachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B0240C1BA400ECDD3A /* AsyncCachedImageView.swift */; };
 		3E5404B3240C345100ECDD3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B2240C345100ECDD3A /* Utils.swift */; };
 		3E5404B5240C352C00ECDD3A /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B4240C352C00ECDD3A /* MovieModel.swift */; };
 		3E5404B7240C695A00ECDD3A /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B6240C695A00ECDD3A /* MovieView.swift */; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		3E199FF524142960003DE8BC /* SearchSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSelectorViewController.swift; sourceTree = "<group>"; };
-		3E5404B0240C1BA400ECDD3A /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		3E5404B0240C1BA400ECDD3A /* AsyncCachedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncCachedImageView.swift; sourceTree = "<group>"; };
 		3E5404B2240C345100ECDD3A /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3E5404B4240C352C00ECDD3A /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		3E5404B6240C695A00ECDD3A /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				3E6527D3240EBD4A004A596F /* ActorView.swift */,
-				3E5404B0240C1BA400ECDD3A /* AsyncImageView.swift */,
+				3E5404B0240C1BA400ECDD3A /* AsyncCachedImageView.swift */,
 				3EDE6BDA240F0C0E00CC5E14 /* CastTableViewCell.swift */,
 				3E6527CF240DD320004A596F /* CastView.swift */,
 				3EDE6BD8240F0B8E00CC5E14 /* ListMovieTableViewCell.swift */,
@@ -226,7 +226,7 @@
 				3E5404BB240CC53B00ECDD3A /* MovieViewController.swift in Sources */,
 				3E5404B7240C695A00ECDD3A /* MovieView.swift in Sources */,
 				3E6527D2240EBCC5004A596F /* ActorViewController.swift in Sources */,
-				3E5404B1240C1BA400ECDD3A /* AsyncImageView.swift in Sources */,
+				3E5404B1240C1BA400ECDD3A /* AsyncCachedImageView.swift in Sources */,
 				3E6527D4240EBD4A004A596F /* ActorView.swift in Sources */,
 				4EA6A035240B27050063C21B /* TabViewController.swift in Sources */,
 				4EA6A025240B246F0063C21B /* UpcomingViewController.swift in Sources */,
@@ -377,7 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EP5YM7PC7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TabBarApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -396,7 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5EP5YM7PC7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TabBarApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
