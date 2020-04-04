@@ -64,23 +64,23 @@ func getMatchingMovies<T: Decodable>(title: String, myType: T.Type, completion: 
      }
 }
 
-func getMovieInfo(movieId: Int, completion: @escaping (Movie) -> Void) {
+func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
 
-    fetchNetworkData(url: .movieInfo(withId: movieId), myType: Movie.self) { movie in
+    fetchNetworkData(url: .movieInfo(withId: movieId), myType: T.self) { movie in
          completion(movie)
     }
 }
 
-func getCastInfo(movieId: Int, completion: @escaping (Cast) -> Void) {
+func getCastInfo<T: Decodable>(movieId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
 
-    fetchNetworkData(url: .castInfo(withId: movieId), myType: Cast.self) { cast in
+    fetchNetworkData(url: .castInfo(withId: movieId), myType: T.self) { cast in
         completion(cast)
     }
 }
 
-func getActorInfo(actorId: Int, completion: @escaping (Actor) -> Void) {
+func getActorInfo<T: Decodable>(actorId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
 
-    fetchNetworkData(url: .actorInfo(withId: actorId), myType: Actor.self) { cast in
+    fetchNetworkData(url: .actorInfo(withId: actorId), myType: T.self) { cast in
         completion(cast)
     }
 }

@@ -28,7 +28,7 @@ final class ActorViewController: UIViewController, Storyboarded {
 
         self.actorView.translatesAutoresizingMaskIntoConstraints = false
 
-        getActorInfo(actorId: self.actorId) { [weak self] actor in
+        getActorInfo(actorId: self.actorId, myType: Actor.self) { [weak self] actor in
             if let self = self {
                 self.title = actor.name
                 self.actorView.setActorInfo(actorInfo: actor)
