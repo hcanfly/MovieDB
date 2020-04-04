@@ -10,18 +10,19 @@ import Foundation
 
 let tmdbKey = "<your TMDb api key goes here>"   // "<your TMDb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
-let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)&language=en-US&page=1"
-let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)&language=en-US&page=1"
+let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)"
+let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)"
 let searchBaseURLString = "https://api.themoviedb.org/3/search/movie?api_key=\(tmdbKey)&query="
-let searchActorsBaseURLString = "https://api.themoviedb.org/3/search/person?api_key=\(tmdbKey)&page=1&include_adult=false&query="
+let searchActorsBaseURLString = "https://api.themoviedb.org/3/search/person?api_key=\(tmdbKey)&query="
 
 
 // download data and decode from JSON
-func fetchNetworkData<T: Decodable>(urlString: String, myType: T.Type, completion: @escaping (T) -> Void) {
-      guard let url = URL(string: urlString) else {
+func fetchNetworkData<T: Decodable>(url: URL?, myType: T.Type, completion: @escaping (T) -> Void) {
+      guard let url = url else {
         print("did you enter your TMBD api key in DataFetcher.swift?")
         return
       }
+
     let task = URLSession.shared.dataTask(with: url) { data, _, error in
         if let data = data {
             let jsonDecoder = JSONDecoder()
@@ -44,37 +45,69 @@ func fetchNetworkData<T: Decodable>(urlString: String, myType: T.Type, completio
 
 func getMoviesNowPlaying<T: Decodable>(myType: T.Type, completion: @escaping (T) -> Void) {
 
-    fetchNetworkData(urlString: nowPlayingURLString, myType: T.self) { nowPlaying in
+    fetchNetworkData(url: .nowPlaying, myType: T.self) { nowPlaying in
         completion(nowPlaying)
     }
 }
 
 func getUpcomingMovies<T: Decodable>(myType: T.Type, completion: @escaping (T) -> Void) {
 
-    fetchNetworkData(urlString: upcomingURLString, myType: T.self) { nowPlaying in
+    fetchNetworkData(url: .upcoming, myType: T.self) { nowPlaying in
         completion(nowPlaying)
     }
 }
 
 func getMatchingMovies<T: Decodable>(title: String, myType: T.Type, completion: @escaping (T) -> Void) {
 
-    fetchNetworkData(urlString: searchBaseURLString + "\(title)", myType: T.self) { foundTitles in
+    fetchNetworkData(url: .matchingMovies(withNameLike: title), myType: T.self) { foundTitles in
          completion(foundTitles)
      }
 }
 
 func getMovieInfo(movieId: Int, completion: @escaping (Movie) -> Void) {
 
-    let movieURL = "https://api.themoviedb.org/3/movie/\(movieId)?api_key=\(tmdbKey)"
-    fetchNetworkData(urlString: movieURL, myType: Movie.self) { movie in
+    fetchNetworkData(url: .movieInfo(withId: movieId), myType: Movie.self) { movie in
          completion(movie)
     }
 }
 
 func getCastInfo(movieId: Int, completion: @escaping (Cast) -> Void) {
 
-    let castURL = "https://api.themoviedb.org/3/movie/\(movieId)/credits?api_key=\(tmdbKey)"
-    fetchNetworkData(urlString: castURL, myType: Cast.self) { cast in
+    fetchNetworkData(url: .castInfo(withId: movieId), myType: Cast.self) { cast in
         completion(cast)
+    }
+}
+
+func getActorInfo(actorId: Int, completion: @escaping (Actor) -> Void) {
+
+    fetchNetworkData(url: .actorInfo(withId: actorId), myType: Actor.self) { cast in
+        completion(cast)
+    }
+}
+
+
+extension URL {
+    static var nowPlaying: URL? {
+        URL(string: nowPlayingURLString)
+    }
+
+    static var upcoming: URL? {
+        URL(string: upcomingURLString)
+    }
+
+    static func matchingMovies(withNameLike title: String) -> URL? {
+        URL(string: searchBaseURLString + "\(title)")
+    }
+
+    static func movieInfo(withId id: Int) -> URL? {
+        URL(string: "https://api.themoviedb.org/3/movie/\(id)?api_key=\(tmdbKey)")
+    }
+
+    static func castInfo(withId id: Int) -> URL? {
+        URL(string: "https://api.themoviedb.org/3/movie/\(id)/credits?api_key=\(tmdbKey)")
+    }
+
+    static func actorInfo(withId id: Int) -> URL? {
+        URL(string: "https://api.themoviedb.org/3/person/\(id)?api_key=\(tmdbKey)")
     }
 }

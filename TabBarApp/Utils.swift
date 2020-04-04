@@ -58,7 +58,8 @@ func tbmdDateStringToFullDate(date: String) -> String {
         return ""
     }
 
-    dateFormatter.dateFormat = "MMMM d,yyyy"
+    //dateFormatter.dateFormat = "MMMM d,yyyy"
+    dateFormatter.dateStyle = .long
     let nd = dateFormatter.string(from: d!)
 
     return nd

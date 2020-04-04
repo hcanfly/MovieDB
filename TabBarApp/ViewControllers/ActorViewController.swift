@@ -28,15 +28,14 @@ final class ActorViewController: UIViewController, Storyboarded {
 
         self.actorView.translatesAutoresizingMaskIntoConstraints = false
 
-        let actorURL = "https://api.themoviedb.org/3/person/\(self.actorId)?api_key=\(tmdbKey)"
-        fetchNetworkData(urlString: actorURL, myType: Actor.self) { [weak self] actor in
+        getActorInfo(actorId: self.actorId) { [weak self] actor in
             if let self = self {
                 self.title = actor.name
                 self.actorView.setActorInfo(actorInfo: actor)
                 self.view.addSubview(self.actorView)
                 self.setupConstraints()
+                }
             }
-        }
     }
 
     private func setupConstraints() {
