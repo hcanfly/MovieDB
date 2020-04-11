@@ -13,7 +13,7 @@ final class ActorView: UIView {
     private let nameLabel: UILabel
     private let birthDateLabel: UILabel
     private let bornPlaceLabel: UILabel
-    private let biographyLabel: UILabel
+    private let biographyTextView: UITextView
     private let diedDateLabel: UILabel
     private var posterImageView: AsyncImageView!
     private var actorInfo = Actor(id: 0, name: "", birthday: "", deathday: nil, biography: "", place_of_birth: nil, profile_path: nil)
@@ -25,6 +25,7 @@ final class ActorView: UIView {
         }
 
         self.setupInfoViews()
+        self.setupConstraints()
         self.setNeedsLayout()
     }
 
@@ -48,12 +49,12 @@ final class ActorView: UIView {
             self.diedDateLabel.isHidden = true
         }
 
-        self.biographyLabel.textAlignment = .left
-        self.biographyLabel.lineBreakMode = .byTruncatingTail
-        self.biographyLabel.numberOfLines = 0
-        self.biographyLabel.font = UIFont(name: "HelveticaNeue", size: 12.0)
-        self.biographyLabel.text = actorInfo.biography ?? ""
-        self.biographyLabel.textColor = .white
+        self.biographyTextView.textAlignment = .left
+        self.biographyTextView.font = UIFont(name: "HelveticaNeue", size: 12.0)
+        self.biographyTextView.text = actorInfo.biography ?? ""
+        self.biographyTextView.backgroundColor = .clear
+        self.biographyTextView.textColor = .white
+        self.biographyTextView.isEditable = false
     }
 
     required init?(coder: NSCoder) {
@@ -61,7 +62,7 @@ final class ActorView: UIView {
         self.nameLabel = UILabel(frame: CGRect.zero)
         self.birthDateLabel = UILabel(frame: CGRect.zero)
         self.bornPlaceLabel = UILabel(frame: CGRect.zero)
-        self.biographyLabel = UILabel(frame: CGRect.zero)
+        self.biographyTextView = UITextView(frame: CGRect.zero)
         self.diedDateLabel = UILabel(frame: CGRect.zero)
 
         super.init(coder: coder)
@@ -71,10 +72,10 @@ final class ActorView: UIView {
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.birthDateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.bornPlaceLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.biographyLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.biographyTextView.translatesAutoresizingMaskIntoConstraints = false
         self.diedDateLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        self.addSubview(self.biographyLabel)
+        self.addSubview(self.biographyTextView)
         self.addSubview(self.nameLabel)
         self.addSubview(self.birthDateLabel)
         self.addSubview(self.bornPlaceLabel)
@@ -83,9 +84,6 @@ final class ActorView: UIView {
         self.posterImageView!.clipsToBounds = true
         self.posterImageView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.posterImageView)
-
-        setupInfoViews()
-        self.setupConstraints()
     }
 
     private func setupConstraints() {
@@ -95,7 +93,7 @@ final class ActorView: UIView {
         self.bornPlaceLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
         NSLayoutConstraint.activate([
-        self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: edgeInsets.top + 10),
+        self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: edgeInsets.top),
         self.nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: edgeInsets.left + leftEdgeInset),
         self.nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: edgeInsets.right),
 
@@ -104,20 +102,19 @@ final class ActorView: UIView {
 
         self.bornPlaceLabel.topAnchor.constraint(equalTo: self.birthDateLabel.topAnchor),
         self.bornPlaceLabel.leadingAnchor.constraint(equalTo: self.birthDateLabel.trailingAnchor),
-        //self.bornPlaceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: edgeInsets.right),
 
         self.diedDateLabel.topAnchor.constraint(equalTo: self.birthDateLabel.bottomAnchor, constant: 8),
         self.diedDateLabel.leadingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor),
 
-        self.posterImageView!.topAnchor.constraint(equalTo: self.birthDateLabel.bottomAnchor, constant: 10),
+        self.posterImageView!.topAnchor.constraint(equalTo: self.diedDateLabel.bottomAnchor, constant: 10),
         self.posterImageView!.leadingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor),
         self.posterImageView!.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4),
         self.posterImageView!.widthAnchor.constraint(equalTo: posterImageView!.heightAnchor, multiplier: 0.66666),
 
-        self.biographyLabel.topAnchor.constraint(equalTo: self.posterImageView.bottomAnchor, constant: 8),
-        self.biographyLabel.leadingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor),
-        //self.biographyLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: edgeInsets.bottom),
-        self.biographyLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: edgeInsets.right),
+        self.biographyTextView.topAnchor.constraint(equalTo: self.posterImageView.bottomAnchor, constant: 8),
+        self.biographyTextView.leadingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor),
+        self.biographyTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: edgeInsets.bottom - 40),
+        self.biographyTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: edgeInsets.right),
         ])
     }
 }

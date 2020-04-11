@@ -13,7 +13,7 @@ final class MovieView: UIView {
     private let nameLabel: UILabel
     private let runningTimeLabel: UILabel
     private let ratingsLabel: UILabel
-    private let descriptionLabel: UILabel
+    private let descriptionTextView: UITextView
     private let voterCountLabel: UILabel
     private var poster: AsyncImageView!
     var movieInfo: Movie! {
@@ -26,7 +26,7 @@ final class MovieView: UIView {
 
     override init(frame: CGRect) {
         self.nameLabel = UILabel(frame: CGRect.zero)
-        self.descriptionLabel = UILabel(frame: CGRect.zero)
+        self.descriptionTextView = UITextView(frame: CGRect.zero)
         self.runningTimeLabel = UILabel(frame: CGRect.zero)
         self.ratingsLabel = UILabel(frame: CGRect.zero)
         self.voterCountLabel = UILabel(frame: CGRect.zero)
@@ -39,8 +39,9 @@ final class MovieView: UIView {
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.runningTimeLabel)
         self.runningTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(self.descriptionLabel)
-        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.descriptionTextView)
+        self.descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.descriptionTextView.backgroundColor = .clear
         self.addSubview(self.ratingsLabel)
         self.ratingsLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.voterCountLabel)
@@ -71,10 +72,10 @@ final class MovieView: UIView {
             self.poster.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             self.poster.widthAnchor.constraint(equalTo: self.poster.heightAnchor, multiplier: 0.6666),
 
-            self.descriptionLabel.topAnchor.constraint(equalTo: self.poster.topAnchor),
-            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.poster.trailingAnchor, constant: 6),
-            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -6),
-            self.descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: self.poster.heightAnchor)
+            self.descriptionTextView.topAnchor.constraint(equalTo: self.poster.topAnchor),
+            self.descriptionTextView.leadingAnchor.constraint(equalTo: self.poster.trailingAnchor, constant: 6),
+            self.descriptionTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -6),
+            self.descriptionTextView.heightAnchor.constraint(lessThanOrEqualTo: self.poster.heightAnchor)
         ])
     }
 
@@ -100,14 +101,13 @@ final class MovieView: UIView {
         self.voterCountLabel.text = self.movieInfo.voteCount != nil ? "(\(self.movieInfo.voteCount!))" : ""
         self.voterCountLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         self.voterCountLabel.textColor = .white
-        self.descriptionLabel.textAlignment = .left
-        self.descriptionLabel.lineBreakMode = .byTruncatingTail
-        self.descriptionLabel.numberOfLines = 0
-        self.descriptionLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        self.descriptionLabel.text = self.movieInfo.overView
-        //self.descriptionLabel.sizeToFit()
-        self.descriptionLabel.textColor = .white
-        self.descriptionLabel.clipsToBounds = true
+        self.descriptionTextView.textAlignment = .left
+        self.descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.descriptionTextView.text = self.movieInfo.overView
+        self.descriptionTextView.backgroundColor = .clear
+        self.descriptionTextView.textColor = .white
+        self.descriptionTextView.clipsToBounds = true
+        self.descriptionTextView.isEditable = false
     }
 
     private func runningTime() -> String {
