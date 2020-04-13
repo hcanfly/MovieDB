@@ -9,8 +9,6 @@
 import UIKit
 
 
-
-
 struct Movie: Decodable {
     let id: Int
     let imdbId: String?
@@ -61,16 +59,17 @@ struct ListMovie: Decodable {
 
 extension ListMovie {
 
-    init(from dict: [String: Any]) {
-        self.id = dict["id"] as! Int
-        self.title = dict["title"] as! String
-        self.posterPath = dict["poster_path"] as? String
-        self.backdropPath = dict["backdrop_path"] as? String
-        self.overView = dict["overview"] as! String?
-        self.releaseDate = dict["release_date"] as! String?
-        self.popularity = dict["popularity"] as! Double?
-    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
 
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.overView = try container.decode(String.self, forKey: .overView)
+        self.posterPath = try container.decode(String.self, forKey: .posterPath)
+        self.backdropPath = try container.decode(String.self, forKey: .backdropPath)
+        self.releaseDate = try container.decode(String.self, forKey: .releaseDate)
+        self.popularity = try container.decode(Double.self, forKey: .popularity)
+    }
 }
 
 struct ListMovies: Decodable {
@@ -101,12 +100,7 @@ struct CastActor: Decodable {
 
 struct Cast: Decodable {
     let cast: [CastActor]?
-
-    enum CodingKeys: String, CodingKey {
-        case cast
-    }
 }
-
 
 struct Actor: Decodable {
     let id: Int
