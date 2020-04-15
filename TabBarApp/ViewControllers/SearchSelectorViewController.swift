@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+/*
 
 enum SearchType {
     case movie
@@ -75,3 +75,5 @@ class SearchSelectorViewController: UIViewController, Storyboarded {
 
 
 }
+*/
+

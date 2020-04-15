@@ -16,11 +16,9 @@ final class SearchCoordinator: Coordinator {
     init(navigationController: UINavigationController = UINavigationController()) {
         self.navigationController = navigationController
 
-        //let viewController = SearchSelectorViewController.instantiate()
-        let viewController = SearchViewController.instantiate()
-        viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+        let viewController = SearchMoviesViewController.instantiate()
+        viewController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "Search"), tag: 3)
         viewController.coordinator = self
-        viewController.searchType = .movie
 
         navigationController.viewControllers = [viewController]
     }
@@ -33,12 +31,4 @@ final class SearchCoordinator: Coordinator {
         self.navigationController.pushViewController(movieVC, animated: false)
     }
 
-    // search for tv and actor not implemented
-    func search(for type: SearchType) {
-        let viewController = SearchViewController.instantiate()
-        viewController.coordinator = self
-        viewController.searchType = type
-
-        navigationController.pushViewController(viewController, animated: true)
-    }
 }

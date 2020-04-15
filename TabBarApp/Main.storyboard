@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16095" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16084.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Search Actors View Controller-->
+        <scene sceneID="3pa-lN-3Mk">
+            <objects>
+                <viewController storyboardIdentifier="SearchActorsViewController" id="hdM-xS-7F3" customClass="SearchActorsViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F5R-W1-XMa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="P4O-ac-DcD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bWm-5s-ut2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1285" y="-342"/>
+        </scene>
         <!--Movie View Controller-->
         <scene sceneID="h0L-2n-UcA">
             <objects>
-                <viewController storyboardIdentifier="MovieViewController" id="mJX-NL-mK5" customClass="MovieViewController" customModule="TabBarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieViewController" id="mJX-NL-mK5" customClass="MovieViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OSJ-JJ-Mrt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="-957" y="-455"/>
         </scene>
-        <!--Search View Controller-->
+        <!--Search Movies View Controller-->
         <scene sceneID="D0k-pr-jgd">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="0cZ-6O-gyY" customClass="SearchViewController" customModule="TabBarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchMoviesViewController" id="0cZ-6O-gyY" customClass="SearchMoviesViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EAz-H3-WhN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +56,7 @@
         <!--Now Playing View Controller-->
         <scene sceneID="0pk-lg-ATm">
             <objects>
-                <viewController storyboardIdentifier="NowPlayingViewController" id="Dhp-ss-jyV" customClass="NowPlayingViewController" customModule="TabBarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NowPlayingViewController" id="Dhp-ss-jyV" customClass="NowPlayingViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LR7-sZ-FwL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,7 +71,7 @@
         <!--Upcoming View Controller-->
         <scene sceneID="uh7-T7-SqT">
             <objects>
-                <viewController storyboardIdentifier="UpcomingViewController" id="kTA-Gt-PHc" customClass="UpcomingViewController" customModule="TabBarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpcomingViewController" id="kTA-Gt-PHc" customClass="UpcomingViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k5i-KG-fYI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,7 +86,7 @@
         <!--Search Selector View Controller-->
         <scene sceneID="wWO-qr-FDb">
             <objects>
-                <viewController storyboardIdentifier="SearchSelectorViewController" id="ek8-85-OHp" customClass="SearchSelectorViewController" customModule="TabBarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchSelectorViewController" id="ek8-85-OHp" customClass="SearchSelectorViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RxJ-7U-aGh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,12 +101,12 @@
         <!--Actor View Controller-->
         <scene sceneID="jta-LW-MMC">
             <objects>
-                <viewController storyboardIdentifier="ActorViewController" id="uL7-u5-CIz" customClass="ActorViewController" customModule="TabBarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActorViewController" id="uL7-u5-CIz" customClass="ActorViewController" customModule="MovieDb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tsy-o3-00V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1xt-kK-zOK" customClass="ActorView" customModule="TabBarApp" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1xt-kK-zOK" customClass="ActorView" customModule="MovieDb" customModuleProvider="target">
                                 <rect key="frame" x="20" y="44" width="381" height="818"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

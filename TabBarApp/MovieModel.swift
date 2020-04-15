@@ -51,33 +51,3 @@ extension ListMovies {
         movies = try? values.decode([ListMovie].self, forKey: .results)
     }
 }
-
-
-struct CastActor: Decodable {
-    let id: Int
-    let character: String
-    let name: String
-    let profilePath: String?
-}
-
-struct Cast: Decodable {
-    let cast: [CastActor]?
-}
-
-struct Actor: Decodable {
-    let id: Int
-    let name: String
-    let birthday: String?
-    let deathday: String?
-    let biography: String?
-    let placeOfBirth: String?
-    let profilePath: String?
-
-    var born: String {
-        return self.birthday != nil ? tbmdDateStringToFullDate(date: self.birthday!) : ""
-    }
-
-    var died: String {
-        return self.deathday != nil ? tbmdDateStringToFullDate(date: self.deathday!) : ""
-    }
-}

@@ -19,12 +19,12 @@ final class TabBarController: UITabBarController {
     private let nowPlaying = NowPlayingMovieCoordinator()
     private let upcoming = UpcomingMovieCoordinator()
     private let search = SearchCoordinator()
-    private var listMovies: ListMovies?
+    private let searchActors = SearchActorsCoordinator()
 
     
     override func viewDidLoad() {
 
-        self.viewControllers = [self.nowPlaying.navigationController, self.upcoming.navigationController, self.search.navigationController]
+        self.viewControllers = [self.nowPlaying.navigationController, self.upcoming.navigationController, self.search.navigationController, self.searchActors.navigationController]
     }
 
     override func viewWillAppear(_ animated: Bool) {

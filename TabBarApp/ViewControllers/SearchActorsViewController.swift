@@ -1,23 +1,28 @@
 //
-//  SearchViewController.swift
+//  SearchActorsViewController.swift
 //  TabBarApp
 //
-//  Created by Gary on 3/2/20.
+//  Created by Gary on 4/15/20.
 //  Copyright © 2020 Gary Hanson. All rights reserved.
+//
+//  It would have been straightforward to modify the SearchMoviesViewController to accept a
+//  search type (movie or actor) and create separate datasources and delegates for the two
+//  types. But, overall it would have added to complexity because of changes to coordinator, etc.
+//  and this is sample code that I don't want to add complexity for something that isn't the
+//  main point of the sample.
 //
 
 import UIKit
 
-final class SearchViewController: UIViewController, Storyboarded {
-    weak var coordinator: SearchCoordinator?
-    var searchType: SearchType?
+final class SearchActorsViewController: UIViewController, Storyboarded {
+    weak var coordinator: SearchActorsCoordinator?
     private var tableView: UITableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
-    private var movies: ListMovies?
+    private var actors: ListActors?
     private let debouncer = Debouncer()
     private var debounceReload: (() -> Void)!
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,19 +46,8 @@ final class SearchViewController: UIViewController, Storyboarded {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.setShowsCancelButton(false, animated: false)
-        
-        var searchPlaceholder = ""
-        switch self.searchType {
-        case .movie:
-            searchPlaceholder = "Search Movies"
-        case .tv:
-            searchPlaceholder = "Search TV"
-        case .actor:
-            searchPlaceholder = "Search Actors"
-        case .none:
-            print("No search type")
-        }
-        self.searchController.searchBar.placeholder = searchPlaceholder
+
+        self.searchController.searchBar.placeholder = "Search Actors"
         self.navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
@@ -67,16 +61,7 @@ final class SearchViewController: UIViewController, Storyboarded {
                 var searchString = newstring.replacingOccurrences(of: " ", with: "+")
                 searchString = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                 if searchString.count > 1 {
-                    switch self.searchType {
-                    case .movie:
-                        self.findMatchingMovies(title: searchString)
-                    case .tv:
-                        self.findMatchingMovies(title: searchString)        // tv and actor search not implemented
-                    case .actor:
-                        self.findMatchingMovies(title: searchString)
-                    case .none:
-                        print("No search type")
-                    }
+                    self.findMatchingMovies(title: searchString)
                 }
             }
         }
@@ -102,9 +87,9 @@ final class SearchViewController: UIViewController, Storyboarded {
     }
 
     private func findMatchingMovies(title: String) {
-        getMatchingMovies(title: title, myType: ListMovies.self) { [weak self] foundTitles in
+        getMatchingActors(name: title, myType: ListActors.self) { [weak self] foundActors in
             if let self = self {
-                self.movies = foundTitles
+                self.actors = foundActors
                 self.tableView.reloadData()
             }
         }
@@ -113,11 +98,11 @@ final class SearchViewController: UIViewController, Storyboarded {
 
 
 
-extension SearchViewController: UITableViewDelegate {
+extension SearchActorsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movieInfo = self.movies!.movies![indexPath.row]
-        self.coordinator?.movieSelected(id: movieInfo.id)
+        let actorInfo = self.actors!.actors![indexPath.row]
+        self.coordinator?.actorSelected(id: actorInfo.id)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -125,17 +110,17 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
-extension SearchViewController: UITableViewDataSource {
+extension SearchActorsViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-    return self.movies == nil ? 0 : self.movies!.movies!.count
+    return self.actors == nil ? 0 : self.actors!.actors!.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
 
-    cell.textLabel?.text = self.movies!.movies![indexPath.row].title
+    cell.textLabel?.text = self.actors!.actors![indexPath.row].name
     cell.textLabel?.textColor = .white
     cell.backgroundColor = .clear
 
@@ -143,39 +128,22 @@ extension SearchViewController: UITableViewDataSource {
   }
 }
 
-extension SearchViewController: UISearchResultsUpdating {
+extension SearchActorsViewController: UISearchResultsUpdating {
 
   func updateSearchResults(for searchController: UISearchController) {
     self.debounceReload()
   }
 }
 
-extension SearchViewController: UISearchControllerDelegate, UISearchBarDelegate {
+extension SearchActorsViewController: UISearchControllerDelegate, UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         if searchText.count == 0
         {
-            if self.movies != nil && self.movies!.movies!.count > 0 {
-                self.movies = nil
+            if self.actors != nil && self.actors!.actors!.count > 0 {
+                self.actors = nil
                 self.tableView.reloadData()
             }
-        }
-    }
-}
-
-
-
-
-class Debouncer {
-
-    var currentWorkItem: DispatchWorkItem?
-
-    func debounce(delay: DispatchTimeInterval, queue: DispatchQueue = .main, action: @escaping (() -> Void)) -> () -> Void {
-        return {  [weak self] in
-            guard let self = self else { return }
-            self.currentWorkItem?.cancel()
-            self.currentWorkItem = DispatchWorkItem { action() }
-            queue.asyncAfter(deadline: .now() + delay, execute: self.currentWorkItem!)
         }
     }
 }

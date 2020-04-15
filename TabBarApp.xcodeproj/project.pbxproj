@@ -14,13 +14,16 @@
 		3E5404B7240C695A00ECDD3A /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404B6240C695A00ECDD3A /* MovieView.swift */; };
 		3E5404BB240CC53B00ECDD3A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404BA240CC53B00ECDD3A /* MovieViewController.swift */; };
 		3E5404BD240CD86B00ECDD3A /* UpcomingMovieCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5404BC240CD86B00ECDD3A /* UpcomingMovieCoordinator.swift */; };
-		3E6527C8240D5CC1004A596F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527C7240D5CC1004A596F /* SearchViewController.swift */; };
+		3E6527C8240D5CC1004A596F /* SearchMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527C7240D5CC1004A596F /* SearchMoviesViewController.swift */; };
 		3E6527CA240D5D2C004A596F /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527C9240D5D2C004A596F /* SearchCoordinator.swift */; };
 		3E6527CC240D6B77004A596F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E6527CB240D6B76004A596F /* Assets.xcassets */; };
 		3E6527D0240DD320004A596F /* CastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527CF240DD320004A596F /* CastView.swift */; };
 		3E6527D2240EBCC5004A596F /* ActorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527D1240EBCC5004A596F /* ActorViewController.swift */; };
 		3E6527D4240EBD4A004A596F /* ActorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527D3240EBD4A004A596F /* ActorView.swift */; };
 		3E6527D6240ED7A0004A596F /* ActorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6527D5240ED7A0004A596F /* ActorCoordinator.swift */; };
+		3ED150A824475D8B0006DE19 /* ActorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED150A724475D8B0006DE19 /* ActorModel.swift */; };
+		3ED150AA24475FB80006DE19 /* SearchActorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED150A924475FB80006DE19 /* SearchActorsViewController.swift */; };
+		3ED150AC244762F20006DE19 /* SearchActorsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED150AB244762F20006DE19 /* SearchActorsCoordinator.swift */; };
 		3EDE6BD9240F0B8E00CC5E14 /* ListMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE6BD8240F0B8E00CC5E14 /* ListMovieTableViewCell.swift */; };
 		3EDE6BDB240F0C0E00CC5E14 /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDE6BDA240F0C0E00CC5E14 /* CastTableViewCell.swift */; };
 		4EA6A01F240B246F0063C21B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA6A01E240B246F0063C21B /* AppDelegate.swift */; };
@@ -42,13 +45,16 @@
 		3E5404B6240C695A00ECDD3A /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		3E5404BA240CC53B00ECDD3A /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		3E5404BC240CD86B00ECDD3A /* UpcomingMovieCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMovieCoordinator.swift; sourceTree = "<group>"; };
-		3E6527C7240D5CC1004A596F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		3E6527C7240D5CC1004A596F /* SearchMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesViewController.swift; sourceTree = "<group>"; };
 		3E6527C9240D5D2C004A596F /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		3E6527CB240D6B76004A596F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E6527CF240DD320004A596F /* CastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastView.swift; sourceTree = "<group>"; };
 		3E6527D1240EBCC5004A596F /* ActorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorViewController.swift; sourceTree = "<group>"; };
 		3E6527D3240EBD4A004A596F /* ActorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorView.swift; sourceTree = "<group>"; };
 		3E6527D5240ED7A0004A596F /* ActorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCoordinator.swift; sourceTree = "<group>"; };
+		3ED150A724475D8B0006DE19 /* ActorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorModel.swift; sourceTree = "<group>"; };
+		3ED150A924475FB80006DE19 /* SearchActorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActorsViewController.swift; sourceTree = "<group>"; };
+		3ED150AB244762F20006DE19 /* SearchActorsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActorsCoordinator.swift; sourceTree = "<group>"; };
 		3EDE6BD8240F0B8E00CC5E14 /* ListMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMovieTableViewCell.swift; sourceTree = "<group>"; };
 		3EDE6BDA240F0C0E00CC5E14 /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
 		4EA6A01B240B246F0063C21B /* MovieDb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDb.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +88,8 @@
 				3E5404BA240CC53B00ECDD3A /* MovieViewController.swift */,
 				4EA6A022240B246F0063C21B /* NowPlayingViewController.swift */,
 				3E199FF524142960003DE8BC /* SearchSelectorViewController.swift */,
-				3E6527C7240D5CC1004A596F /* SearchViewController.swift */,
+				3ED150A924475FB80006DE19 /* SearchActorsViewController.swift */,
+				3E6527C7240D5CC1004A596F /* SearchMoviesViewController.swift */,
 				4EA6A034240B27050063C21B /* TabViewController.swift */,
 				4EA6A024240B246F0063C21B /* UpcomingViewController.swift */,
 			);
@@ -96,6 +103,7 @@
 				4EA6A038240B42590063C21B /* Coordinator.swift */,
 				4EA6A03A240B42B60063C21B /* NowPlayingMovieCoordinator.swift */,
 				3E6527C9240D5D2C004A596F /* SearchCoordinator.swift */,
+				3ED150AB244762F20006DE19 /* SearchActorsCoordinator.swift */,
 				3E5404BC240CD86B00ECDD3A /* UpcomingMovieCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -138,6 +146,7 @@
 				3E6527CE240DC6E7004A596F /* Coordinators */,
 				3EDE6BD7240F0B6500CC5E14 /* Views */,
 				3E5404B4240C352C00ECDD3A /* MovieModel.swift */,
+				3ED150A724475D8B0006DE19 /* ActorModel.swift */,
 				4EA6A03E240B8EA70063C21B /* DataFetcher.swift */,
 				3E5404B2240C345100ECDD3A /* Utils.swift */,
 				3E6527CB240D6B76004A596F /* Assets.xcassets */,
@@ -230,15 +239,18 @@
 				3E6527D4240EBD4A004A596F /* ActorView.swift in Sources */,
 				4EA6A035240B27050063C21B /* TabViewController.swift in Sources */,
 				4EA6A025240B246F0063C21B /* UpcomingViewController.swift in Sources */,
+				3ED150A824475D8B0006DE19 /* ActorModel.swift in Sources */,
 				4EA6A039240B42590063C21B /* Coordinator.swift in Sources */,
 				3EDE6BD9240F0B8E00CC5E14 /* ListMovieTableViewCell.swift in Sources */,
 				3E5404B3240C345100ECDD3A /* Utils.swift in Sources */,
-				3E6527C8240D5CC1004A596F /* SearchViewController.swift in Sources */,
+				3E6527C8240D5CC1004A596F /* SearchMoviesViewController.swift in Sources */,
+				3ED150AA24475FB80006DE19 /* SearchActorsViewController.swift in Sources */,
 				3E5404BD240CD86B00ECDD3A /* UpcomingMovieCoordinator.swift in Sources */,
 				4EA6A023240B246F0063C21B /* NowPlayingViewController.swift in Sources */,
 				4EA6A01F240B246F0063C21B /* AppDelegate.swift in Sources */,
 				4EA6A03B240B42B70063C21B /* NowPlayingMovieCoordinator.swift in Sources */,
 				3E6527D6240ED7A0004A596F /* ActorCoordinator.swift in Sources */,
+				3ED150AC244762F20006DE19 /* SearchActorsCoordinator.swift in Sources */,
 				4EA6A03F240B8EA70063C21B /* DataFetcher.swift in Sources */,
 				3E6527D0240DD320004A596F /* CastView.swift in Sources */,
 			);

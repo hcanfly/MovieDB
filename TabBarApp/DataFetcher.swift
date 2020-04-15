@@ -8,7 +8,7 @@
 
 import Foundation
 
-let tmdbKey = "your TMDb api key goes here>"   // "<your TMDb api key goes here>"
+let tmdbKey = "e1ca1713c055f737455c5a27de78f41d"   // "<your TMDb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)"
@@ -65,6 +65,14 @@ func getMatchingMovies<T: Decodable>(title: String, myType: T.Type, completion: 
      }
 }
 
+func getMatchingActors<T: Decodable>(name: String, myType: T.Type, completion: @escaping (T) -> Void) {
+
+    fetchNetworkData(url: .matchingActors(withNameLike: name), myType: T.self) { foundTitles in
+         completion(foundTitles)
+     }
+}
+
+
 func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
 
     fetchNetworkData(url: .movieInfo(withId: movieId), myType: T.self) { movie in
@@ -98,6 +106,10 @@ extension URL {
 
     static func matchingMovies(withNameLike title: String) -> URL? {
         URL(string: searchBaseURLString + "\(title)")
+    }
+
+    static func matchingActors(withNameLike name: String) -> URL? {
+        URL(string: searchActorsBaseURLString + "\(name)")
     }
 
     static func movieInfo(withId id: Int) -> URL? {
