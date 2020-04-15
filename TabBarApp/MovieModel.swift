@@ -13,26 +13,13 @@ struct Movie: Decodable {
     let id: Int
     let imdbId: String?
     let title: String
-    let overView: String?
+    let overview: String?
     let backdropPath: String?
     let posterPath: String?
     let releaseDate: String?
     let runtime: Int?
     let voteAverage: Double?
     let voteCount: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case imdbId = "imdb_id"
-        case title = "title"
-        case overView = "overview"
-        case backdropPath = "backdrop_path"
-        case posterPath = "poster_path"
-        case releaseDate = "release_date"
-        case runtime = "runtime"
-        case voteAverage = "vote_average"
-        case voteCount = "vote_count"
-    }
 }
 
 
@@ -42,35 +29,11 @@ struct ListMovie: Decodable {
     let title: String
     let posterPath: String?
     let backdropPath: String?
-    let overView: String?
+    let overview: String?
     let releaseDate: String?
     let popularity: Double?
-
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case title = "title"
-        case overView = "overview"
-        case posterPath = "poster_path"
-        case backdropPath = "backdrop_path"
-        case releaseDate = "release_date"
-        case popularity = "popularity"
-    }
 }
 
-extension ListMovie {
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.id = try container.decode(Int.self, forKey: .id)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.overView = try container.decode(String.self, forKey: .overView)
-        self.posterPath = try container.decode(String.self, forKey: .posterPath)
-        self.backdropPath = try container.decode(String.self, forKey: .backdropPath)
-        self.releaseDate = try container.decode(String.self, forKey: .releaseDate)
-        self.popularity = try container.decode(Double.self, forKey: .popularity)
-    }
-}
 
 struct ListMovies: Decodable {
     let movies: [ListMovie]?
@@ -90,12 +53,11 @@ extension ListMovies {
 }
 
 
-
 struct CastActor: Decodable {
     let id: Int
     let character: String
     let name: String
-    let profile_path: String?
+    let profilePath: String?
 }
 
 struct Cast: Decodable {
@@ -108,8 +70,8 @@ struct Actor: Decodable {
     let birthday: String?
     let deathday: String?
     let biography: String?
-    let place_of_birth: String?
-    let profile_path: String?
+    let placeOfBirth: String?
+    let profilePath: String?
 
     var born: String {
         return self.birthday != nil ? tbmdDateStringToFullDate(date: self.birthday!) : ""

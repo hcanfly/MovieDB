@@ -103,7 +103,7 @@ final class MovieView: UIView {
         self.voterCountLabel.textColor = .white
         self.descriptionTextView.textAlignment = .left
         self.descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 14.0)
-        self.descriptionTextView.text = self.movieInfo.overView
+        self.descriptionTextView.text = self.movieInfo.overview
         self.descriptionTextView.backgroundColor = .clear
         self.descriptionTextView.textColor = .white
         self.descriptionTextView.clipsToBounds = true

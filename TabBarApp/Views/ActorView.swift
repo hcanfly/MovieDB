@@ -16,12 +16,12 @@ final class ActorView: UIView {
     private let biographyTextView: UITextView
     private let diedDateLabel: UILabel
     private var posterImageView: AsyncImageView!
-    private var actorInfo = Actor(id: 0, name: "", birthday: "", deathday: nil, biography: "", place_of_birth: nil, profile_path: nil)
+    private var actorInfo = Actor(id: 0, name: "", birthday: "", deathday: nil, biography: "", placeOfBirth: nil, profilePath: nil)
 
     func setActorInfo(actorInfo: Actor) {
         self.actorInfo = actorInfo
-        if actorInfo.profile_path != nil {
-            self.posterImageView!.downloadImage(urlString: imageURLBasePath + actorInfo.profile_path!)
+        if actorInfo.profilePath != nil {
+            self.posterImageView!.downloadImage(urlString: imageURLBasePath + actorInfo.profilePath!)
         }
 
         self.setupInfoViews()
@@ -38,7 +38,7 @@ final class ActorView: UIView {
         self.birthDateLabel.text = "Born: " + actorInfo.born
         self.birthDateLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
         self.birthDateLabel.textColor = .white
-        self.bornPlaceLabel.text = actorInfo.place_of_birth == nil ? "" : " in " + actorInfo.place_of_birth!
+        self.bornPlaceLabel.text = actorInfo.placeOfBirth == nil ? "" : " in " + actorInfo.placeOfBirth!
         self.bornPlaceLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
         self.bornPlaceLabel.textColor = .white
         if self.actorInfo.deathday != nil {

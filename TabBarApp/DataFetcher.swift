@@ -8,7 +8,7 @@
 
 import Foundation
 
-let tmdbKey = "e1ca1713c055f737455c5a27de78f41d"   // "<your TMDb api key goes here>"
+let tmdbKey = "your TMDb api key goes here>"   // "<your TMDb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)"
@@ -26,6 +26,7 @@ func fetchNetworkData<T: Decodable>(url: URL?, myType: T.Type, completion: @esca
     let task = URLSession.shared.dataTask(with: url) { data, _, error in
         if let data = data {
             let jsonDecoder = JSONDecoder()
+            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
                 let theData = try jsonDecoder.decode(T.self, from: data)
                 DispatchQueue.main.async {

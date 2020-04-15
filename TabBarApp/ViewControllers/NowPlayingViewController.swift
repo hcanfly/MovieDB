@@ -58,7 +58,7 @@ extension NowPlayingViewController: UITableViewDelegate, UITableViewDataSource {
 
         let movieInfo = self.nowShowingMovies!.movies![indexPath.row]
         cell.nameLabel.text = movieInfo.title
-        cell.descriptionLabel.text = movieInfo.overView
+        cell.descriptionLabel.text = movieInfo.overview
         if movieInfo.posterPath != nil {
             cell.addPoster(posterPath: movieInfo.posterPath!)
         }
