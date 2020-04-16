@@ -18,10 +18,6 @@ final class NowPlayingViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
 
         self.title = "Now Playing"
-        let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor.black
-        ]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
 
         setupTableView()
         getMoviesNowPlaying(myType: ListMovies.self) { [weak self] nowPlaying in

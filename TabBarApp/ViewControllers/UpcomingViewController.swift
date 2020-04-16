@@ -18,10 +18,6 @@ final class UpcomingViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
 
         self.title = "Upcoming"
-        let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor.black
-        ]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
 
         setupTableView()
 

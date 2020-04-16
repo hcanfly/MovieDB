@@ -18,10 +18,6 @@ final class ActorViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtains2")!)
 
         self.view.addSubview(self.actorView)

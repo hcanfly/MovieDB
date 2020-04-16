@@ -21,12 +21,7 @@ final class MovieViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = attrs
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtain")!)
-        // self.view.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func loadView() {
