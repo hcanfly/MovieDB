@@ -37,10 +37,11 @@ final class MovieViewController: UIViewController, Storyboarded {
         self.view.addSubview(self.castView)
 
         NSLayoutConstraint.activate([
-            self.movieView.widthAnchor.constraint(equalToConstant: 400),
+            //self.movieView.widthAnchor.constraint(equalToConstant: 400),
+            self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
             self.movieView.heightAnchor.constraint(equalTo: self.movieView.widthAnchor, multiplier: 1.0),
             self.movieView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            self.movieView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
+            self.movieView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -6),
 
             self.castView.topAnchor.constraint(equalTo: self.movieView.bottomAnchor, constant: 10),
             self.castView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),

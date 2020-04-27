@@ -63,7 +63,7 @@ final class MovieView: UIView {
             self.runningTimeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 2),
             self.runningTimeLabel.heightAnchor.constraint(equalToConstant: 18),
             self.ratingsLabel.topAnchor.constraint(equalTo: self.runningTimeLabel.topAnchor),
-            self.ratingsLabel.leadingAnchor.constraint(equalTo: self.runningTimeLabel.trailingAnchor, constant: 2),
+            self.ratingsLabel.leadingAnchor.constraint(equalTo: self.runningTimeLabel.trailingAnchor, constant: 16),
             self.voterCountLabel.topAnchor.constraint(equalTo: self.runningTimeLabel.topAnchor),
             self.voterCountLabel.leadingAnchor.constraint(equalTo: self.ratingsLabel.trailingAnchor, constant: 2),
 

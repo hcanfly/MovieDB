@@ -399,7 +399,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gary.h.TabBarApp;
 				PRODUCT_NAME = MovieDb;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -418,7 +418,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gary.h.TabBarApp;
 				PRODUCT_NAME = MovieDb;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
