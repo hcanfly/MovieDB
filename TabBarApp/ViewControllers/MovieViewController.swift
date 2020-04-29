@@ -56,14 +56,14 @@ final class MovieViewController: UIViewController, Storyboarded {
 
     private func loadMovieInfo() {
 
-        getMovieInfo(movieId: self.movieId, myType: Movie.self) { [weak self] movie in
+        NetworkData.getMovieInfo(movieId: self.movieId, myType: Movie.self) { [weak self] movie in
             if let self = self {
                 self.title = movie.title
                 self.movieView.movieInfo = movie
                 }
             }
 
-        getCastInfo(movieId: self.movieId, myType: Cast.self) { [weak self] cast in
+        NetworkData.getCastInfo(movieId: self.movieId, myType: Cast.self) { [weak self] cast in
             if let self = self {
                self.castView.cast = cast
             }

@@ -21,7 +21,7 @@ final class UpcomingViewController: UIViewController, Storyboarded {
 
         setupTableView()
 
-        getUpcomingMovies(myType: ListMovies.self) { [weak self] upcoming in
+        NetworkData.getUpcomingMovies(myType: ListMovies.self) { [weak self] upcoming in
              if let self = self {
                     self.upcomingMovies = upcoming
                     self.tableView.reloadData()

@@ -20,7 +20,7 @@ final class NowPlayingViewController: UIViewController, Storyboarded {
         self.title = "Now Playing"
 
         setupTableView()
-        getMoviesNowPlaying(myType: ListMovies.self) { [weak self] nowPlaying in
+        NetworkData.getMoviesNowPlaying(myType: ListMovies.self) { [weak self] nowPlaying in
              if let self = self {
                     self.nowShowingMovies = nowPlaying
                     self.tableView.reloadData()
