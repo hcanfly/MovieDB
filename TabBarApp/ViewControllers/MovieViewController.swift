@@ -8,24 +8,26 @@
 
 import UIKit
 
+
 final class MovieViewController: UIViewController, Storyboarded {
     weak var coordinator: Coordinator?
-    var actorCoordinator: ActorCoordinator?
     var movieId = 0
 
-    var movieView: MovieView!
-    var castView: CastView!
-    var initialized = false
+    private var actorCoordinator: ActorCoordinator?
+    private var movieView: MovieView!
+    private var castView: CastView!
+    private var initialized = false
 
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtain")!)
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//    }
 
     override func loadView() {
         super.loadView()
+
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtain")!)
 
         self.movieView = MovieView(frame: CGRect.zero)
         self.movieView.translatesAutoresizingMaskIntoConstraints = false

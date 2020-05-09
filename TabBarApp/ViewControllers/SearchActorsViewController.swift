@@ -14,6 +14,7 @@
 
 import UIKit
 
+
 final class SearchActorsViewController: UIViewController, Storyboarded {
     weak var coordinator: SearchActorsCoordinator?
     private var tableView: UITableView = UITableView()
@@ -23,8 +24,8 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
     private var debounceReload: (() -> Void)!
 
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
 
         self.view.layer.contents = UIImage(named: "RedCurtains")?.cgImage
         self.view.layer.contentsGravity = .resizeAspectFill
@@ -49,10 +50,14 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
 
         self.searchController.searchBar.placeholder = "Search Actors"
         self.navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        self.navigationItem.hidesSearchBarWhenScrolling = true
         definesPresentationContext = true
 
         self.setupConstraints()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         self.debounceReload = self.debouncer.debounce(delay: .seconds(1)) {
             if self.searchController.searchBar.text!.count > 1 {

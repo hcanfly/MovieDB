@@ -15,6 +15,7 @@
 
 import UIKit
 
+
 final class TabBarController: UITabBarController {
     private let nowPlaying = NowPlayingMovieCoordinator()
     private let upcoming = UpcomingMovieCoordinator()

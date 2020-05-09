@@ -8,18 +8,25 @@
 
 import UIKit
 
+
 final class NowPlayingViewController: UIViewController, Storyboarded {
     weak var coordinator: NowPlayingMovieCoordinator?
     private var nowShowingMovies: ListMovies?
     private var tableView = UITableView()
 
+
+    override func loadView() {
+        super.loadView()
+
+        self.title = "Now Playing"
+        self.tableView.showsVerticalScrollIndicator = false
+
+        setupTableView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Now Playing"
-
-        setupTableView()
         NetworkData.getMoviesNowPlaying(myType: ListMovies.self) { [weak self] nowPlaying in
              if let self = self {
                     self.nowShowingMovies = nowPlaying

@@ -8,18 +8,24 @@
 
 import UIKit
 
+
 final class UpcomingViewController: UIViewController, Storyboarded {
     weak var coordinator: UpcomingMovieCoordinator?
     private var upcomingMovies: ListMovies?
     private var tableView = UITableView()
 
+
+    override func loadView() {
+        super.loadView()
+
+        self.title = "Upcoming"
+        self.tableView.showsVerticalScrollIndicator = false
+
+        setupTableView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.title = "Upcoming"
-
-        setupTableView()
 
         NetworkData.getUpcomingMovies(myType: ListMovies.self) { [weak self] upcoming in
              if let self = self {

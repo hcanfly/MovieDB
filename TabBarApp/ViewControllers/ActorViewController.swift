@@ -15,14 +15,18 @@ final class ActorViewController: UIViewController, Storyboarded {
     var actorId = 0
     @IBOutlet weak var actorView: ActorView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "RedCurtains2")!)
 
         self.view.addSubview(self.actorView)
 
         self.actorView.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         NetworkData.getActorInfo(actorId: self.actorId, myType: Actor.self) { [weak self] actor in
             if let self = self {

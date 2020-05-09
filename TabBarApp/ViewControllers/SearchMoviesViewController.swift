@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 final class SearchMoviesViewController: UIViewController, Storyboarded {
     weak var coordinator: SearchCoordinator?
     private var tableView: UITableView = UITableView()
@@ -16,9 +17,9 @@ final class SearchMoviesViewController: UIViewController, Storyboarded {
     private let debouncer = Debouncer()
     private var debounceReload: (() -> Void)!
 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    override func loadView() {
+        super.loadView()
 
         self.view.layer.contents = UIImage(named: "RedCurtains")?.cgImage
         self.view.layer.contentsGravity = .resizeAspectFill
@@ -40,13 +41,17 @@ final class SearchMoviesViewController: UIViewController, Storyboarded {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.setShowsCancelButton(false, animated: false)
-        
+
         self.searchController.searchBar.placeholder = "Search Movies"
         self.navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = true
         definesPresentationContext = true
 
         self.setupConstraints()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         self.debounceReload = self.debouncer.debounce(delay: .seconds(1)) {
             if self.searchController.searchBar.text!.count > 1 {
