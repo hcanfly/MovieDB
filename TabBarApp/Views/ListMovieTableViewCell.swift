@@ -56,7 +56,7 @@ final class ListMovieTableViewCell: UITableViewCell {
 
         let desiredImageHeight = CGFloat(contentView.frame.height * 0.666666)
         self.nameLabel.frame = CGRect(x: desiredImageHeight + 22, y: 0, width: 200, height: 20)
-        self.descriptionLabel.frame = CGRect(x: desiredImageHeight + 22, y: 14, width: contentView.frame.width - (desiredImageHeight + 10), height: contentView.frame.height - 20)
+        self.descriptionLabel.frame = CGRect(x: desiredImageHeight + 22, y: 14, width: contentView.frame.width - desiredImageHeight - 22, height: contentView.frame.height - 20)
     }
 
 

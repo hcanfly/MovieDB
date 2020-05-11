@@ -46,7 +46,7 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
         self.searchController.searchBar.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.setShowsCancelButton(false, animated: false)
+        //self.searchController.searchBar.setShowsCancelButton(false, animated: false)
 
         self.searchController.searchBar.placeholder = "Search Actors"
         self.navigationItem.searchController = searchController

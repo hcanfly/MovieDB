@@ -40,7 +40,7 @@ final class SearchMoviesViewController: UIViewController, Storyboarded {
         self.searchController.searchBar.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.setShowsCancelButton(false, animated: false)
+        //self.searchController.searchBar.setShowsCancelButton(false, animated: false)
 
         self.searchController.searchBar.placeholder = "Search Movies"
         self.navigationItem.searchController = searchController
@@ -136,13 +136,22 @@ extension SearchMoviesViewController: UISearchResultsUpdating {
 
 extension SearchMoviesViewController: UISearchControllerDelegate, UISearchBarDelegate {
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count == 0
         {
-            if self.movies != nil && self.movies!.movies!.count > 0 {
-                self.movies = nil
-                self.tableView.reloadData()
-            }
+            self.clearResults()
         }
     }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.clearResults()
+    }
+
+    func clearResults() {
+        if self.movies != nil && self.movies!.movies!.count > 0 {
+            self.movies = nil
+            self.tableView.reloadData()
+        }
+    }
+    
 }
