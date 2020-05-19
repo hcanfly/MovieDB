@@ -16,7 +16,6 @@ final class MovieViewController: UIViewController, Storyboarded {
     private var actorCoordinator: ActorCoordinator?
     private var movieView: MovieView!
     private var castView: CastView!
-    private var initialized = false
 
 
 //    override func viewDidLoad() {
