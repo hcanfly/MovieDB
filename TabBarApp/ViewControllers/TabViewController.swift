@@ -15,6 +15,8 @@
 
 import UIKit
 
+let baseFontName = "HelveticaNeue"
+let boldFontName = "HelveticaNeue-Bold"
 
 final class TabBarController: UITabBarController {
     private let nowPlaying = NowPlayingMovieCoordinator()

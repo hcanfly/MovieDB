@@ -17,9 +17,9 @@ final class CastTableViewCell: UITableViewCell {
 
         self.backgroundColor = .systemPink
         self.textLabel?.textColor = .white
-        self.textLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.textLabel?.font = UIFont(name: baseFontName, size: 14.0)
         self.detailTextLabel?.textColor = .white
-        self.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.detailTextLabel?.font = UIFont(name: baseFontName, size: 14.0)
 
     }
 

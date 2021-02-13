@@ -33,7 +33,7 @@ final class CastView: UIView {
         self.addSubview(self.tableView)
 
         self.label.text = "Cast:"
-        self.label.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        self.label.font = UIFont(name: baseFontName, size: 16.0)
         self.label.textColor = .white
 
         self.setupTableView()

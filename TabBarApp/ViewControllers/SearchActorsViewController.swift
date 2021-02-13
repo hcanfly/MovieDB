@@ -46,7 +46,6 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
         self.searchController.searchBar.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        //self.searchController.searchBar.setShowsCancelButton(false, animated: false)
 
         self.searchController.searchBar.placeholder = "Search Actors"
         self.navigationItem.searchController = searchController
@@ -58,12 +57,14 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.debounceReload = self.debouncer.debounce(delay: .seconds(1)) {
             if self.searchController.searchBar.text!.count > 1 {
-                // just in case of an extra space. more than that - too bad
-                let newstring = self.searchController.searchBar.text!.replacingOccurrences(of: "  ", with: " ")
-                var searchString = newstring.replacingOccurrences(of: " ", with: "+")
+                var cleanstring = self.searchController.searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+                cleanstring = cleanstring.trimmingCharacters(in: .whitespacesAndNewlines)
+                // just in case of an extra space inside string. more than that - too bad
+                cleanstring = cleanstring.replacingOccurrences(of: "  ", with: " ")
+                var searchString = cleanstring.replacingOccurrences(of: " ", with: "+")
                 searchString = searchString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                 if searchString.count > 1 {
                     self.findMatchingMovies(title: searchString)

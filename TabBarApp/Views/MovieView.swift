@@ -89,20 +89,20 @@ final class MovieView: UIView {
 
         let releaseYear = movieInfo.releaseDate != nil ? movieInfo.releaseDate!.prefix(4) : "Unknown"
         self.nameLabel.text = self.movieInfo.title + " (" + releaseYear + ")"
-        self.nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
+        self.nameLabel.font = UIFont(name: boldFontName, size: 16.0)
         self.nameLabel.textColor = .white
         self.nameLabel.adjustsFontSizeToFitWidth = true
         self.runningTimeLabel.text = runningTime()
-        self.runningTimeLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.runningTimeLabel.font = UIFont(name: baseFontName, size: 14.0)
         self.runningTimeLabel.textColor = .white
         self.ratingsLabel.text = ratingsInfo()
-        self.ratingsLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.ratingsLabel.font = UIFont(name: baseFontName, size: 14.0)
         self.ratingsLabel.textColor = .white
         self.voterCountLabel.text = self.movieInfo.voteCount != nil ? "(\(self.movieInfo.voteCount!))" : ""
-        self.voterCountLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.voterCountLabel.font = UIFont(name: baseFontName, size: 14.0)
         self.voterCountLabel.textColor = .white
         self.descriptionTextView.textAlignment = .left
-        self.descriptionTextView.font = UIFont(name: "HelveticaNeue", size: 14.0)
+        self.descriptionTextView.font = UIFont(name: baseFontName, size: 14.0)
         self.descriptionTextView.text = self.movieInfo.overview
         self.descriptionTextView.backgroundColor = .clear
         self.descriptionTextView.textColor = .white

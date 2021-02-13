@@ -31,26 +31,26 @@ final class ActorView: UIView {
 
     private func setupInfoViews() {
         self.nameLabel.text = actorInfo.name
-        self.nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        self.nameLabel.font = UIFont(name: boldFontName, size: 20.0)
         self.nameLabel.textColor = .white
         self.nameLabel.adjustsFontSizeToFitWidth = true
 
         self.birthDateLabel.text = "Born: " + actorInfo.born
-        self.birthDateLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        self.birthDateLabel.font = UIFont(name: baseFontName, size: 16.0)
         self.birthDateLabel.textColor = .white
         self.bornPlaceLabel.text = actorInfo.placeOfBirth == nil ? "" : " in " + actorInfo.placeOfBirth!
-        self.bornPlaceLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        self.bornPlaceLabel.font = UIFont(name: baseFontName, size: 16.0)
         self.bornPlaceLabel.textColor = .white
         if self.actorInfo.deathday != nil {
             self.diedDateLabel.text = "Died: " + actorInfo.died
-            self.diedDateLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+            self.diedDateLabel.font = UIFont(name: baseFontName, size: 16.0)
             self.diedDateLabel.textColor = .white
         } else {
             self.diedDateLabel.isHidden = true
         }
 
         self.biographyTextView.textAlignment = .left
-        self.biographyTextView.font = UIFont(name: "HelveticaNeue", size: 12.0)
+        self.biographyTextView.font = UIFont(name: baseFontName, size: 12.0)
         self.biographyTextView.text = actorInfo.biography ?? ""
         self.biographyTextView.backgroundColor = .clear
         self.biographyTextView.textColor = .white

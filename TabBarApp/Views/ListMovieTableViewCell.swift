@@ -15,7 +15,7 @@ final class ListMovieTableViewCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: frame.height * 0.666666 + 10, y: 0, width: 200, height: 20))
 
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16.0)
+        label.font = UIFont(name: boldFontName, size: 16.0)
 
         return label
     }()
@@ -23,7 +23,7 @@ final class ListMovieTableViewCell: UITableViewCell {
     lazy var descriptionLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: frame.height * 0.666666 + 10, y: 14, width: frame.width - (frame.height * 0.666666 + 10) - 80, height: 80))
 
-        label.font = UIFont(name: "HelveticaNeue", size: 12.0)
+        label.font = UIFont(name: baseFontName, size: 12.0)
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 0
 
@@ -49,8 +49,6 @@ final class ListMovieTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
-
         let padding = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         contentView.frame = contentView.frame.inset(by: padding)
 
@@ -63,6 +61,5 @@ final class ListMovieTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        //doLayout()
     }
 }
