@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = tabBarController
 
         window?.makeKeyAndVisible()
+        
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = .dark
+        }
         return true
     }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-let tmdbKey = "<your tmdb api key goes here>"   // "<your tmdb api key goes here>"
+let tmdbKey = "e1ca1713c055f737455c5a27de78f41d"   // "<your tmdb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)"
@@ -16,82 +16,87 @@ let searchBaseURLString = "https://api.themoviedb.org/3/search/movie?api_key=\(t
 let searchActorsBaseURLString = "https://api.themoviedb.org/3/search/person?api_key=\(tmdbKey)&query="
 
 
+enum NetworkError: Error {
+    case invalidURL
+    case invalidServerResponse
+    case invalidJSONResponse
+}
+
 enum NetworkData {
     // download data and decode from JSON
-    static func fetch<T: Decodable>(url: URL?, myType: T.Type, completion: @escaping (T) -> Void) {
-          guard let url = url else {
-            print("did you enter your tmdb api key in DataFetcher.swift?")
-            return
+
+    static func fetch<T: Decodable>(url: URL?, myType: T.Type) async throws -> T {
+        guard let url = url else {
+            print("Invalid URL. Did you enter your newsapi api key in Network.swift?")
+            throw NetworkError.invalidURL
           }
+        
+        let session = URLSession.shared
 
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data {
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                do {
-                    let theData = try jsonDecoder.decode(T.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(theData)
-                    }
-                } catch {
-                    print("Error parsing JSON")
-                }
-            } else {
-                print("Download error: " + error!.localizedDescription)
-            }
+        let (data, response) = try await session.data(from: url)
+        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+            throw NetworkError.invalidServerResponse
         }
+        
+        //print(String(bytes: data, encoding: String.Encoding.utf8))
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let theData = try decoder.decode(T.self, from: data)
 
-        task.resume()
+        return theData
     }
 
-
-    static func getMoviesNowPlaying<T: Decodable>(myType: T.Type, completion: @escaping (T) -> Void) {
-
-        fetch(url: .nowPlaying, myType: T.self) { nowPlaying in
-            completion(nowPlaying)
+    static func getInfo<T: Decodable>(for url: URL, myType: T.Type) async -> T? {
+       do {
+            let info = try await fetch(url: url, myType: T.self)
+            
+            return info
+        } catch {
+            print(error)    // handle errors here. return nil so UI doesn't have to
+            return nil
         }
     }
+    
+    static func getMoviesNowPlaying<T: Decodable>(myType: T.Type) async -> T? {
+        let info = await getInfo(for: .nowPlaying!, myType: T.self)
 
-    static func getUpcomingMovies<T: Decodable>(myType: T.Type, completion: @escaping (T) -> Void) {
-
-        fetch(url: .upcoming, myType: T.self) { nowPlaying in
-            completion(nowPlaying)
-        }
+        return info
     }
 
-    static func getMatchingMovies<T: Decodable>(title: String, myType: T.Type, completion: @escaping (T) -> Void) {
+    static func getUpcomingMovies<T: Decodable>(myType: T.Type) async -> T? {
+        let info = await getInfo(for: .upcoming!, myType: T.self)
 
-        fetch(url: .matchingMovies(withNameLike: title), myType: T.self) { foundTitles in
-             completion(foundTitles)
-         }
+        return info
     }
 
-    static func getMatchingActors<T: Decodable>(name: String, myType: T.Type, completion: @escaping (T) -> Void) {
+    static func getMatchingMovies<T: Decodable>(title: String, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .matchingMovies(withNameLike: title)!, myType: T.self)
 
-        fetch(url: .matchingActors(withNameLike: name), myType: T.self) { foundTitles in
-             completion(foundTitles)
-         }
+        return info
     }
 
-    static func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
+    static func getMatchingActors<T: Decodable>(name: String, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .matchingActors(withNameLike: name)!, myType: T.self)
 
-        fetch(url: .movieInfo(withId: movieId), myType: T.self) { movie in
-             completion(movie)
-        }
+        return info
     }
 
-    static func getCastInfo<T: Decodable>(movieId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
+    static func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .movieInfo(withId: movieId)!, myType: T.self)
 
-        fetch(url: .castInfo(withId: movieId), myType: T.self) { cast in
-            completion(cast)
-        }
+        return info
     }
 
-    static func getActorInfo<T: Decodable>(actorId: Int, myType: T.Type, completion: @escaping (T) -> Void) {
+    static func getCastInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .castInfo(withId: movieId)!, myType: T.self)
 
-        fetch(url: .actorInfo(withId: actorId), myType: T.self) { cast in
-            completion(cast)
-        }
+        return info
+    }
+
+    static func getActorInfo<T: Decodable>(actorId: Int, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .actorInfo(withId: actorId)!, myType: T.self)
+
+        return info
     }
 }
 

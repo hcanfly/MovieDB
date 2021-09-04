@@ -27,15 +27,16 @@ final class ActorViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NetworkData.getActorInfo(actorId: self.actorId, myType: Actor.self) { [weak self] actor in
-            if let self = self {
+        
+        Task {
+            let actor = await NetworkData.getActorInfo(actorId: self.actorId, myType: Actor.self)
+            if let actor = actor {
                 self.title = actor.name
                 self.actorView.setActorInfo(actorInfo: actor)
                 self.view.addSubview(self.actorView)
                 self.setupConstraints()
-                }
             }
+        }
     }
 
     private func setupConstraints() {

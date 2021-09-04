@@ -27,13 +27,19 @@ final class UpcomingViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NetworkData.getUpcomingMovies(myType: ListMovies.self) { [weak self] upcoming in
-             if let self = self {
-                    self.upcomingMovies = upcoming
-                    self.tableView.reloadData()
-            }
-         }
+        loadData()
     }
+    
+    private func loadData() {
+        Task {
+            let upcoming = await NetworkData.getUpcomingMovies(myType: ListMovies.self)
+            if let upcoming = upcoming {
+                self.upcomingMovies = upcoming
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
 
     private func setupTableView() {
         self.tableView.frame = self.view.frame.insetBy(dx: 20, dy: 80)

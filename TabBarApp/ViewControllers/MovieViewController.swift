@@ -50,19 +50,19 @@ final class MovieViewController: UIViewController, Storyboarded {
     }
 
     private func loadMovieInfo() {
-
-        NetworkData.getMovieInfo(movieId: self.movieId, myType: Movie.self) { [weak self] movie in
-            if let self = self {
+        
+        Task {
+            let movie = await NetworkData.getMovieInfo(movieId: self.movieId, myType: Movie.self)
+            if let movie = movie {
                 self.title = movie.title
                 self.movieView.movieInfo = movie
-                }
             }
-
-        NetworkData.getCastInfo(movieId: self.movieId, myType: Cast.self) { [weak self] cast in
-            if let self = self {
-               self.castView.cast = cast
+            
+            let cast = await NetworkData.getCastInfo(movieId: self.movieId, myType: Cast.self)
+            if let cast = cast {
+                self.castView.cast = cast
             }
-         }
+        }
     }
 }
 

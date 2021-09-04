@@ -26,13 +26,14 @@ final class NowPlayingViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NetworkData.getMoviesNowPlaying(myType: ListMovies.self) { [weak self] nowPlaying in
-             if let self = self {
-                    self.nowShowingMovies = nowPlaying
-                    self.tableView.reloadData()
+        
+        Task {
+            let nowPlaying = await NetworkData.getMoviesNowPlaying(myType: ListMovies.self)
+            if let nowPlaying = nowPlaying {
+                self.nowShowingMovies = nowPlaying
+                self.tableView.reloadData()
             }
-         }
+        }
     }
 
     private func setupTableView() {

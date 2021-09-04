@@ -42,7 +42,7 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
         self.searchController.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.autocapitalizationType = .none
-        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -93,8 +93,9 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
     }
 
     private func findMatchingMovies(title: String) {
-        NetworkData.getMatchingActors(name: title, myType: ListActors.self) { [weak self] foundActors in
-            if let self = self {
+        Task {
+        let foundActors = await NetworkData.getMatchingActors(name: title, myType: ListActors.self)
+            if let foundActors = foundActors {
                 self.actors = foundActors
                 self.tableView.reloadData()
             }

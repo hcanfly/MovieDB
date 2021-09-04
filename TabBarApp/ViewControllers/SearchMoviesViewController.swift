@@ -36,7 +36,7 @@ final class SearchMoviesViewController: UIViewController, Storyboarded {
         self.searchController.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.autocapitalizationType = .none
-        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.delegate = self
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
@@ -87,8 +87,9 @@ final class SearchMoviesViewController: UIViewController, Storyboarded {
     }
 
     private func findMatchingMovies(title: String) {
-        NetworkData.getMatchingMovies(title: title, myType: ListMovies.self) { [weak self] foundTitles in
-            if let self = self {
+        Task {
+        let foundTitles = await NetworkData.getMatchingMovies(title: title, myType: ListMovies.self)
+            if let foundTitles = foundTitles {
                 self.movies = foundTitles
                 self.tableView.reloadData()
             }
