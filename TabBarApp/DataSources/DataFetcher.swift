@@ -43,7 +43,7 @@ class DataFetcher: DataProviding {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
-            let theData = try decoder.decode(T.self, from: data)
+            let theData = try decoder.decode(myType, from: data)
 
             return theData
         } catch {
@@ -53,7 +53,7 @@ class DataFetcher: DataProviding {
 
     func getInfo<T: Decodable>(for url: URL?, myType: T.Type) async -> T? {
        do {
-            let info = try await fetch(url: url, myType: T.self)
+            let info = try await fetch(url: url, myType: myType)
             
             return info
         } catch {
@@ -63,43 +63,43 @@ class DataFetcher: DataProviding {
     }
     
     func getMoviesNowPlaying<T: Decodable>(myType: T.Type) async -> T? {
-        let info = await getInfo(for: .nowPlaying, myType: T.self)
+        let info = await getInfo(for: .nowPlaying, myType: myType)
 
         return info
     }
 
     func getUpcomingMovies<T: Decodable>(myType: T.Type) async -> T? {
-        let info = await getInfo(for: .upcoming, myType: T.self)
+        let info = await getInfo(for: .upcoming, myType: myType)
 
         return info
     }
 
     func getMatchingMovies<T: Decodable>(title: String, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .matchingMovies(withNameLike: title), myType: T.self)
+        let info = await getInfo(for: .matchingMovies(withNameLike: title), myType: myType)
 
         return info
     }
 
     func getMatchingActors<T: Decodable>(name: String, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .matchingActors(withNameLike: name), myType: T.self)
+        let info = await getInfo(for: .matchingActors(withNameLike: name), myType: myType)
 
         return info
     }
 
     func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .movieInfo(withId: movieId), myType: T.self)
+        let info = await getInfo(for: .movieInfo(withId: movieId), myType: myType)
 
         return info
     }
 
     func getCastInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .castInfo(withId: movieId), myType: T.self)
+        let info = await getInfo(for: .castInfo(withId: movieId), myType: myType)
 
         return info
     }
 
     func getActorInfo<T: Decodable>(actorId: Int, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .actorInfo(withId: actorId), myType: T.self)
+        let info = await getInfo(for: .actorInfo(withId: actorId), myType: myType)
 
         return info
     }
