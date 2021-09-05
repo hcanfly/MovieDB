@@ -8,6 +8,7 @@
 
 import UIKit
 
+extension MockData: DataProviding {}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,8 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         UIApplication.shared.windows.forEach { window in
-            window.overrideUserInterfaceStyle = .dark
+            window.overrideUserInterfaceStyle = .dark   // it just looks good this way
         }
+        
+        // this will set data provider globally. it can also be set internally as desired.
+        // DataDownloader.dataProvider = MockData.shared
         return true
     }
 

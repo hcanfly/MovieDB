@@ -9,6 +9,7 @@
 import UIKit
 
 
+
 struct Movie: Decodable {
     let id: Int
     let imdbId: String?
@@ -36,7 +37,7 @@ struct ListMovie: Decodable {
 
 
 struct ListMovies: Decodable {
-    let movies: [ListMovie]?
+    var movies: [ListMovie]?
 
     enum CodingKeys: String, CodingKey {
         case results
@@ -50,4 +51,5 @@ extension ListMovies {
 
         movies = try? values.decode([ListMovie].self, forKey: .results)
     }
+    
 }

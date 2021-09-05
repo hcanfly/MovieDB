@@ -17,7 +17,7 @@ struct CastActor: Decodable {
 }
 
 struct Cast: Decodable {
-    let cast: [CastActor]?
+    var cast: [CastActor]?
 }
 
 struct Actor: Decodable {
@@ -44,7 +44,7 @@ struct ListActor: Decodable {
 }
 
 struct ListActors: Decodable {
-    let actors: [ListActor]?
+    var actors: [ListActor]?
 
     enum CodingKeys: String, CodingKey {
         case results
@@ -58,4 +58,6 @@ extension ListActors {
 
         actors = try? values.decode([ListActor].self, forKey: .results)
     }
+    
+
 }

@@ -8,7 +8,8 @@
 
 import Foundation
 
-let tmdbKey = "e1ca1713c055f737455c5a27de78f41d"   // "<your tmdb api key goes here>"
+
+let tmdbKey = "<your tmdb api key goes here>"   // "<your tmdb api key goes here>"
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)"
@@ -22,12 +23,12 @@ enum NetworkError: Error {
     case invalidJSONResponse
 }
 
-enum NetworkData {
-    // download data and decode from JSON
+class DataFetcher: DataProviding {
+    public static let shared = DataFetcher()
 
-    static func fetch<T: Decodable>(url: URL?, myType: T.Type) async throws -> T {
-        guard let url = url else {
-            print("Invalid URL. Did you enter your newsapi api key in Network.swift?")
+    func fetch<T: Decodable>(url: URL?, myType: T.Type) async throws -> T {
+        guard let url = url, tmdbKey != "<your tmdb api key goes here>" else {
+            print("Invalid URL. Did you enter your newsapi api key in DataFetcher.swift?")
             throw NetworkError.invalidURL
           }
         
@@ -41,60 +42,64 @@ enum NetworkData {
         //print(String(bytes: data, encoding: String.Encoding.utf8))
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let theData = try decoder.decode(T.self, from: data)
+        do {
+            let theData = try decoder.decode(T.self, from: data)
 
-        return theData
+            return theData
+        } catch {
+            throw NetworkError.invalidJSONResponse
+        }
     }
 
-    static func getInfo<T: Decodable>(for url: URL, myType: T.Type) async -> T? {
+    func getInfo<T: Decodable>(for url: URL?, myType: T.Type) async -> T? {
        do {
             let info = try await fetch(url: url, myType: T.self)
             
             return info
         } catch {
-            print(error)    // handle errors here. return nil so UI doesn't have to
+            print(error)    // handle errors here. return nil so UI doesn't have to deal with errors.
             return nil
         }
     }
     
-    static func getMoviesNowPlaying<T: Decodable>(myType: T.Type) async -> T? {
-        let info = await getInfo(for: .nowPlaying!, myType: T.self)
+    func getMoviesNowPlaying<T: Decodable>(myType: T.Type) async -> T? {
+        let info = await getInfo(for: .nowPlaying, myType: T.self)
 
         return info
     }
 
-    static func getUpcomingMovies<T: Decodable>(myType: T.Type) async -> T? {
-        let info = await getInfo(for: .upcoming!, myType: T.self)
+    func getUpcomingMovies<T: Decodable>(myType: T.Type) async -> T? {
+        let info = await getInfo(for: .upcoming, myType: T.self)
 
         return info
     }
 
-    static func getMatchingMovies<T: Decodable>(title: String, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .matchingMovies(withNameLike: title)!, myType: T.self)
+    func getMatchingMovies<T: Decodable>(title: String, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .matchingMovies(withNameLike: title), myType: T.self)
 
         return info
     }
 
-    static func getMatchingActors<T: Decodable>(name: String, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .matchingActors(withNameLike: name)!, myType: T.self)
+    func getMatchingActors<T: Decodable>(name: String, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .matchingActors(withNameLike: name), myType: T.self)
 
         return info
     }
 
-    static func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .movieInfo(withId: movieId)!, myType: T.self)
+    func getMovieInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .movieInfo(withId: movieId), myType: T.self)
 
         return info
     }
 
-    static func getCastInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .castInfo(withId: movieId)!, myType: T.self)
+    func getCastInfo<T: Decodable>(movieId: Int, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .castInfo(withId: movieId), myType: T.self)
 
         return info
     }
 
-    static func getActorInfo<T: Decodable>(actorId: Int, myType: T.Type) async -> T? {
-        let info = await getInfo(for: .actorInfo(withId: actorId)!, myType: T.self)
+    func getActorInfo<T: Decodable>(actorId: Int, myType: T.Type) async -> T? {
+        let info = await getInfo(for: .actorInfo(withId: actorId), myType: T.self)
 
         return info
     }

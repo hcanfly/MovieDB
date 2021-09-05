@@ -32,7 +32,7 @@ final class UpcomingViewController: UIViewController, Storyboarded {
     
     private func loadData() {
         Task {
-            let upcoming = await NetworkData.getUpcomingMovies(myType: ListMovies.self)
+            let upcoming = await DataDownloader.getUpcomingMovies(myType: ListMovies.self)
             if let upcoming = upcoming {
                 self.upcomingMovies = upcoming
                 self.tableView.reloadData()

@@ -10,7 +10,6 @@ import UIKit
 
 
 final class AsyncImageView: UIImageView {
-    //static let placeHolderImage = UIImage(named: "Loading")
 
     init(frame: CGRect, urlString: String?) {
         super.init(frame: frame)
@@ -19,7 +18,6 @@ final class AsyncImageView: UIImageView {
         self.bounds = frame
         self.contentMode = .scaleAspectFit
 
-        // self.image = AsyncImageView.placeHolderImage
         if let urlString = urlString {
             downloadImage(urlString: urlString)
         }

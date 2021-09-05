@@ -94,7 +94,7 @@ final class SearchActorsViewController: UIViewController, Storyboarded {
 
     private func findMatchingMovies(title: String) {
         Task {
-        let foundActors = await NetworkData.getMatchingActors(name: title, myType: ListActors.self)
+        let foundActors = await DataDownloader.getMatchingActors(name: title, myType: ListActors.self)
             if let foundActors = foundActors {
                 self.actors = foundActors
                 self.tableView.reloadData()

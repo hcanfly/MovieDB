@@ -88,7 +88,7 @@ final class SearchMoviesViewController: UIViewController, Storyboarded {
 
     private func findMatchingMovies(title: String) {
         Task {
-        let foundTitles = await NetworkData.getMatchingMovies(title: title, myType: ListMovies.self)
+        let foundTitles = await DataDownloader.getMatchingMovies(title: title, myType: ListMovies.self)
             if let foundTitles = foundTitles {
                 self.movies = foundTitles
                 self.tableView.reloadData()

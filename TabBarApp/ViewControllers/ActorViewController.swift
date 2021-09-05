@@ -29,7 +29,7 @@ final class ActorViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         Task {
-            let actor = await NetworkData.getActorInfo(actorId: self.actorId, myType: Actor.self)
+            let actor = await DataDownloader.getActorInfo(actorId: self.actorId, myType: Actor.self)
             if let actor = actor {
                 self.title = actor.name
                 self.actorView.setActorInfo(actorInfo: actor)

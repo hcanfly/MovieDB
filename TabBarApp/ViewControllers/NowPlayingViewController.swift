@@ -28,7 +28,7 @@ final class NowPlayingViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         Task {
-            let nowPlaying = await NetworkData.getMoviesNowPlaying(myType: ListMovies.self)
+            let nowPlaying = await DataDownloader.getMoviesNowPlaying(myType: ListMovies.self)
             if let nowPlaying = nowPlaying {
                 self.nowShowingMovies = nowPlaying
                 self.tableView.reloadData()

@@ -52,13 +52,13 @@ final class MovieViewController: UIViewController, Storyboarded {
     private func loadMovieInfo() {
         
         Task {
-            let movie = await NetworkData.getMovieInfo(movieId: self.movieId, myType: Movie.self)
+            let movie = await DataDownloader.getMovieInfo(movieId: self.movieId, myType: Movie.self)
             if let movie = movie {
                 self.title = movie.title
                 self.movieView.movieInfo = movie
             }
             
-            let cast = await NetworkData.getCastInfo(movieId: self.movieId, myType: Cast.self)
+            let cast = await DataDownloader.getCastInfo(movieId: self.movieId, myType: Cast.self)
             if let cast = cast {
                 self.castView.cast = cast
             }
