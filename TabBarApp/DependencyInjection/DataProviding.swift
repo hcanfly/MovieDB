@@ -6,6 +6,16 @@
 //  Copyright © 2021 Gary Hanson. All rights reserved.
 //
 
+/*
+    DataProviding is a Singleton method of dependency injection. It is probably
+    most appropriate when you have single source for a service, like networking,
+    that you want to be able to test.
+    It is initialized to be the network data source. Changing this will change
+    downloading globally. It can be set in each viewcontroller for example. But the most
+    common use would be to change this in the AppDelegate to use the mock data source for
+    testing. If the injection is global than setting them in the AppDelegate makes a very
+    clean way to do testing. There is commented off code there to use the mock service.
+ */
 import Foundation
 
 

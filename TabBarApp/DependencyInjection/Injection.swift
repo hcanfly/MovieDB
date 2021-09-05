@@ -4,6 +4,8 @@
 //
 //  Created by Gary Hanson on 8/28/21.
 //
+//  Property wrapper based injection has been around for a couple of years. Very clean, and swift-y.
+//  I like this implementation which does that in a very nice way.
 //  Based on article from Antoine van der Lee: https://www.avanderlee.com/swift/dependency-injection/
 //
 

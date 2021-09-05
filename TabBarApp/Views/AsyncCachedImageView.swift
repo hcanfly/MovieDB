@@ -27,7 +27,9 @@ final class AsyncImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
 
-
+    // didn't convert this to use async/await only because I didn't have the time to change the
+    // calling functions to be async.
+    // TODO: convert to async/await
     func downloadImage(urlString: String) {
         // these steps aren't really necessary for our URLs because they come from a known source. worst case should be no data.
         guard let localValidatedURLString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
