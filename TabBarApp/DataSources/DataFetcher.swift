@@ -9,7 +9,8 @@
 import Foundation
 
 
-let tmdbKey = "e1ca1713c055f737455c5a27de78f41d"   // "<your tmdb api key goes here>"
+//let tmdbKey = "<your tmdb api key goes here>"
+
 let imageURLBasePath = "https://image.tmdb.org/t/p/w500"        // w500 specifies image width
 let nowPlayingURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(tmdbKey)"
 let upcomingURLString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(tmdbKey)"
@@ -32,9 +33,7 @@ class DataFetcher: DataProviding {
             throw NetworkError.invalidURL
           }
         
-        let session = URLSession.shared
-
-        let (data, response) = try await session.data(from: url)
+        let (data, response) = try await URLSession.shared.data(from: url)
         guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
             throw NetworkError.invalidServerResponse
         }

@@ -21,6 +21,8 @@ xcuserdata
 *.xcuserstate
 *.xcscmblueprint
 
+APIKey.swift
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
